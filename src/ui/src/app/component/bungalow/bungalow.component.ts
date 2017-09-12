@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Bungalow } from './../../model/bundalow';
+import { Component,Input, OnInit } from '@angular/core';
+import { Bungalow } from './../../model/bungalow';
 
 @Component({
   selector: 'app-bungalow',

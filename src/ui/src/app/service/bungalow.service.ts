@@ -1,45 +1,63 @@
 import { Injectable } from '@angular/core';
 import { Http, Response} from '@angular/http';
 import { environment as env } from '../../environments/environment';
-
+import { Observable } from 'rxjs/Rx';
+import { Bungalow } from './../model/bungalow';
 @Injectable()
 export class BungalowService {
 
   constructor(private http: Http) { }
 
   public all(): Observable<BungalowsResponse> {
-    return this.http.get(`$env.appUrl}/bungalow`)
+    return this.http.get(`${env.appUrl}/bungalows`)
       .map(res => {
         const body: any = res.json();
         return { err: null, bungalows: body._embedded.bungalows};
       })
       .catch(err => {
         console.log('Server error: ' + JSON.stringify(err, null, 2));
-        return Observable.of({err: err, todos: null});
+        return Observable.of({err: err, bungalows: null});
       })
       ;
     }
 
-    public get(bungalowId: string): Observable<BungalowResponse> {
-      return this.http.get(`${env.serverUrl}/todos/${todoId}`)
+    public getBungalow(bungalowId: string): Observable<BungalowResponse> {
+      return this.http.get(`${env.appUrl}/bungalows/${bungalowId}`)
         .map(res => {
           const body: any = res.json();
           console.log(JSON.stringify(body, null, 2));
-          return { err: null, todo: body};
+          return { err: null, bungalow: body};
         })
         .catch(err => {
           console.log('Server error: ' + JSON.stringify(err, null, 2));
-          return Observable.of({err: err, todo: null});
+          return Observable.of({err: err, bungalow: null});
         })
         ;
     }
+    public getBungalows(bungalow: Bungalow)
+                                            : Observable<BungalowsResponse> {
+      return this.http.get(`${env.appUrl}/bungalows/${bungalow.id}?
+                                            nblits=${bungalow.nbLits}&
+                                            ile=${bungalow.ile}&
+                                            prixmax=${bungalow.prixMax}`)
+        .map(res => {
+          const body: any = res.json();
+          return { err: null, bungalows: body._embedded.bungalows};
+        })
+        .catch(err => {
+          console.log('Server error: ' + JSON.stringify(err, null, 2));
+          return Observable.of({err: err, bungalows: null});
+        })
+        ;
+    }
+
 }
 
 export interface BungalowsResponse {
   err: any;
-  todos: Todo[];
+  bungalows: Bungalow[];
 }
 export interface BungalowResponse {
   err: any;
-  todo: Todo;
+  bungalow: Bungalow;
 }

@@ -1,0 +1,15 @@
+<form (ngSubmit)="search()" >
+    <div>
+        <span>Nombre de places:</span>
+        <span><input type="number" name="place" id="places" [(ngModel)]="bungalow.nbLits"></span>
+    </div>
+    <div>
+        <span>Numéro de l'ile:</span>
+        <span><input type="number" name="ile" id="ile" [(ngModel)]="bungalow.ile"></span>
+    </div>
+    <div>
+        <span>Prix max:</span>
+        <span><input type="number" name="prix" id="prix" [(ngModel)]="bungalow.prixMax"></span>
+    </div>
+    <button type="submit">Rechercher</button>
+</form>

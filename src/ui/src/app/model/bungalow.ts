@@ -1,5 +1,6 @@
 export class Bungalow {
   id?: number;
-  nbPlace: number;
-  prix: number;
+  nbLits: number;
+  ile: number;
+  prixMax: number;
 }
