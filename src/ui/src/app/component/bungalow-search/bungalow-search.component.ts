@@ -9,19 +9,19 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
   styleUrls: ['./bungalow-search.component.css']
 })
 export class BungalowSearchComponent implements OnInit {
-  bungalow: Bungalow = null;
+  bungalow: Bungalow;
   constructor(private bungalowService : BungalowService,
     private router: Router,
 ) { }
 
   ngOnInit() {
+    this.bungalow={'nbLits': 0, 'ile' : 0, 'prixMax':0};
   }
 
-  search(): void{
+  search(){
   this.bungalowService.getBungalows(this.bungalow).subscribe(bungalowRes => {
-    if(!bungalowRes.err){
-        this.router.navigate(['/bungalow-list',bungalowRes.bungalows
-]);
+        if(!bungalowRes.err){
+            this.router.navigate(['/list',bungalowRes.bungalows]);
     }
   })
   }

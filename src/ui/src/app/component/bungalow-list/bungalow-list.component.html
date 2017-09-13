@@ -1,3 +1,8 @@
 <p>
-  bungalow-list works!
+    La liste des bungalowzzz
 </p>
+<ol *ngIf="bungalows.length > 0;">
+    <li *ngFor="let bungalow of bungalows">
+        <app-bungalow [bungalow]="bungalow"></app-bungalow>
+    </li>
+</ol>

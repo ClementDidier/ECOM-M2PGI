@@ -10,11 +10,14 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class BungalowListComponent implements OnInit {
 
   bungalows : Bungalow[] = [];
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
+    console.log(    this.activatedRoute.params);
     this.activatedRoute.params.subscribe((params : Params) =>{
-      //this.bungalows = params[];
+      //this.bungalows = params['bungalows'];
+      console.log(params['bungalows']);
     });
   }
 }

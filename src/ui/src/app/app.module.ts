@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   {path : 'list', component: BungalowListComponent},
+  {path : 'list/:bungalows', component: BungalowListComponent},
   {path : 'search', component: BungalowSearchComponent}
 ]
 @NgModule({
