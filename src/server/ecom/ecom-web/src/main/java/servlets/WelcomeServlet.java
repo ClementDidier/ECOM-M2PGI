@@ -9,13 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class WelcomeServlet
  */
-public class WelcomeServlet extends HttpServlet {
+public class WelcomeServlet extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor. 
      */
-    public WelcomeServlet() {
+    public WelcomeServlet() 
+    {
         // TODO Auto-generated constructor stub
     }
 
