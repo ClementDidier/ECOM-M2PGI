@@ -10,5 +10,6 @@ import jobs.Bungalow;
 public interface IBungalowsBean 
 {
 	public Collection<Bungalow> getBungalows();
-	public Collection<Bungalow> getBungalows(String id);
+	public Collection<Bungalow> getBungalows(Integer id);
+	public Collection<Bungalow> getBungalows(Integer bedCount, Integer maxPrice, String ile);
 }

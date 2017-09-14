@@ -35,16 +35,26 @@ public class BungalowsBean implements IBungalowsBean {
 		return bungalows;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Bungalow> getBungalows(String id) 
+	public Collection<Bungalow> getBungalows(Integer id) 
 	{
 		// TODO : Créer des requêtes préalablement (requêtes précompilées)
-		Query queryBungalows = manager.createQuery(" FROM Bungalow");
 		Collection<Bungalow> bungalows = manager.createQuery(
-			    " FROM Bungalow b WHERE b.name=:id")
+			    " FROM Bungalow b WHERE b.id=:id")
 			    .setParameter("id", id)
 			    .getResultList();
 		return bungalows;
+	}
+
+	@Override
+	public Collection<Bungalow> getBungalows(Integer bedcount, Integer maxprice, String islandname) 
+	{
+		Collection<Bungalow> resultList = manager.createQuery(
+			    " FROM Bungalow b WHERE b.bedCount=:bedcount AND b.islandName=:islandname AND b.price <= :maxprice")
+			    .setParameter("bedcount", bedcount)
+			    .setParameter("islandname", islandname)
+			    .setParameter("maxprice", maxprice)
+			    .getResultList();
+		return resultList;
 	}
 }
