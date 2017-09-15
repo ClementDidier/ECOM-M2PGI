@@ -15,7 +15,7 @@ export class BungalowSearchComponent implements OnInit {
 ) { }
 
   ngOnInit() {
-    this.bungalow={'nbLits': 0, 'ile' : 0, 'prixMax':0};
+    this.bungalow={'bedcount': 0, 'islandid' : 0, 'maxprice':0};
   }
 
   search(){
