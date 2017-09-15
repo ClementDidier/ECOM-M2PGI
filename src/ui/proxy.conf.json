@@ -2,7 +2,7 @@
   "/":{
     "target":"http://localhost:8080",
     "secure":false,
-    "pathRewrite":{"^/bungalows": "/bungalows"},
+    "pathRewrite":{"^/rest": "/rest"},
     "changeOrigin":true,
     "logLevel":"debug"
   }

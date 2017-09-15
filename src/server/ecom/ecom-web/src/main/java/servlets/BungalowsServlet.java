@@ -43,7 +43,7 @@ public class BungalowsServlet extends HttpServlet
 				arrayResult.put(bungalow.toJson());
 		}
 		
-		return arrayResult.toString(SPACE_SIZE);
+		return arrayResult.toString(SPACE_SIZE).replace("\"", "").replace("\\", "");
     }
 
 	/**
