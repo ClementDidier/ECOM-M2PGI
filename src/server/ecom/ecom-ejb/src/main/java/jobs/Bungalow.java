@@ -27,20 +27,20 @@ public class Bungalow implements IJsonSerializable, Serializable
 	@Column(name="price")
 	private Integer price;
 	
-	@Column(name="islandName")
-	private String islandName;
+	@Column(name="islandId")
+	private Integer islandId;
 	
 	public Bungalow()
 	{
 		super();
 	}
 	
-	public Bungalow(int bedCount, int price, String islandName)
+	public Bungalow(int bedCount, int price, Integer islandId)
 	{
 		super();
 		this.bedCount = bedCount;
 		this.price = price;
-		this.islandName = islandName;
+		this.islandId = islandId;
 	}
 	
 	public Integer getId()
@@ -58,9 +58,9 @@ public class Bungalow implements IJsonSerializable, Serializable
 		return price;
 	}
 
-	public String getIslandName() 
+	public Integer getIslandId() 
 	{
-		return islandName;
+		return islandId;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class Bungalow implements IJsonSerializable, Serializable
 		obj.put("id", this.getId());
 		obj.put("bedcount", this.getBedCount());
 		obj.put("price", this.getPrice());
-		obj.put("islandname", this.getIslandName());
+		obj.put("islandid", this.getIslandId());
 		
 		return obj.toString();
 	}

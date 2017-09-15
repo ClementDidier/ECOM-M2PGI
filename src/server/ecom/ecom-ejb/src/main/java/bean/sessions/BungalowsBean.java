@@ -27,6 +27,9 @@ public class BungalowsBean implements IBungalowsBean {
     }
 
 	@Override
+	/**
+	 * Obtient la liste des bungalows disponibles dans la base de données
+	 */
 	public Collection<Bungalow> getBungalows() 
 	{
 		// TODO : Créer des requêtes préalablement (requêtes précompilées)
@@ -36,23 +39,32 @@ public class BungalowsBean implements IBungalowsBean {
 	}
 
 	@Override
-	public Collection<Bungalow> getBungalows(Integer id) 
+	/**
+	 * Obtient le bungalow disponible dans la base de données et disposant de l'identifiant donné
+	 */
+	public Bungalow getBungalows(Integer id) 
 	{
 		// TODO : Créer des requêtes préalablement (requêtes précompilées)
-		Collection<Bungalow> bungalows = manager.createQuery(
+		List<Bungalow> bungalows = manager.createQuery(
 			    " FROM Bungalow b WHERE b.id=:id")
 			    .setParameter("id", id)
+			    .setMaxResults(1)
 			    .getResultList();
-		return bungalows;
+		if(bungalows.isEmpty())
+			return null;
+		else return bungalows.get(0);
 	}
 
 	@Override
-	public Collection<Bungalow> getBungalows(Integer bedcount, Integer maxprice, String islandname) 
+	/**
+	 * Obtient la liste des bungalows disponibles dans la base de données et disposant d'un nombre de lits définit, d'un prix inférieur au prix donné et d'une localisation équivalente à celle spécifiée
+	 */
+	public Collection<Bungalow> getBungalows(Integer bedcount, Integer maxprice, Integer islandid) 
 	{
 		Collection<Bungalow> resultList = manager.createQuery(
-			    " FROM Bungalow b WHERE b.bedCount=:bedcount AND b.islandName=:islandname AND b.price <= :maxprice")
+			    " FROM Bungalow b WHERE b.bedCount=:bedcount AND b.islandId=:islandid AND b.price <= :maxprice")
 			    .setParameter("bedcount", bedcount)
-			    .setParameter("islandname", islandname)
+			    .setParameter("islandid", islandid)
 			    .setParameter("maxprice", maxprice)
 			    .getResultList();
 		return resultList;

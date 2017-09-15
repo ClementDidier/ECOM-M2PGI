@@ -47,11 +47,13 @@
             <artifactId>ecom-web</artifactId>
             <type>war</type>
         </dependency>
+        
         <dependency>
             <groupId>m2pgi</groupId>
             <artifactId>ecom-ejb</artifactId>
             <type>ejb</type>
         </dependency>
+        
     </dependencies>
 
     <build>

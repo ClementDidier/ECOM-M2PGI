@@ -29,7 +29,7 @@ public class Welcome implements IWelcome
 	@Override
 	public void initialize() 
 	{
-        manager.persist(new Bungalow(2, 320, "SullyIsland"));
+        manager.persist(new Bungalow(2, 320, 1));
         manager.flush();
 	}
 }

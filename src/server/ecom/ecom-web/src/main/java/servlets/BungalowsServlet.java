@@ -50,27 +50,31 @@ public class BungalowsServlet extends HttpServlet
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{		
+	{	
+		// Usage du langage JPQL pour la projection contre les injections
+		
 		/* REQUEST GET [id] */
 		Integer id = ParameterConverter.getIntegerOf(request.getParameter("id"));
 		if(id != null) 
 		{
-			Collection<Bungalow> bungalows = this.bungalowBean.getBungalows(id);
-			response.getWriter().append(this.convertToJson(bungalows).toString());
+			Bungalow bungalow = this.bungalowBean.getBungalows(id);
+			if(bungalow != null)
+				response.getWriter().append(bungalow.toJson());
 			return;
 		}
 		
 		/* REQUEST GET [bedcount, maxprice, islandname] */
 		Integer bedcount = ParameterConverter.getIntegerOf(request.getParameter("bedcount"));
 		Integer maxprice = ParameterConverter.getIntegerOf(request.getParameter("maxprice"));
-		String islandname = request.getParameter("islandname");
-		if(bedcount != null && maxprice != null && islandname != null)
+		Integer islandid = ParameterConverter.getIntegerOf(request.getParameter("islandid"));
+		if(bedcount != null && maxprice != null && islandid != null)
 		{
-			Collection<Bungalow> bungalows = this.bungalowBean.getBungalows(bedcount,  maxprice,  islandname);
+			Collection<Bungalow> bungalows = this.bungalowBean.getBungalows(bedcount,  maxprice,  islandid);
 			response.getWriter().append(this.convertToJson(bungalows).toString());
 			return;
 		}
-		else if(bedcount != null || maxprice != null || islandname != null)
+		// La requête est invalide si un seul des paramètres de la requête précédante existe
+		else if(bedcount != null || maxprice != null || islandid != null)
 		{
 			Collection<Bungalow> bungalows = null;
 			response.getWriter().append(this.convertToJson(bungalows).toString());
