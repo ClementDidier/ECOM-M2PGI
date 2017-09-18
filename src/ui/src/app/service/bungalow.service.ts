@@ -36,10 +36,12 @@ export class BungalowService {
         ;
     }
     public getBungalows(bungalow: Bungalow) : Observable<BungalowsResponse> {
-      return this.http.get(`${env.appUrl}/bungalows?bedcount=${bungalow.bedcount}&islandid=${bungalow.islandid}&maxprice=${bungalow.maxprice}`)
+      return this.http.get(`${env.appUrl}/bungalows?bedcount=${bungalow.bedcount}&islandid=${bungalow.islandid}&maxprice=${bungalow.price}`)
         .map(res => {
           const body: any = res.json();
-          return { err: null, bungalows: body._embedded.bungalows};
+          if(body._embedded)
+            return { err: null, bungalows: body._embedded.bungalows};
+          return { err: null, bungalows: []};
         })
         .catch(err => {
           console.log('Server error: ' + JSON.stringify(err, null, 2));

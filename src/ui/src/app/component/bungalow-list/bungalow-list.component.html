@@ -1,8 +1,13 @@
-<p>
-    La liste des bungalowzzz
-</p>
-<ol *ngIf="bungalows.length > 0;">
-    <li *ngFor="let bungalow of bungalows">
-        <app-bungalow [bungalow]="bungalow"></app-bungalow>
-    </li>
-</ol>
+<div *ngIf="bungalows && bungalows.length > 0;then content else empty_state">here is ignored</div>
+
+<ng-template #content>
+    Liste des bungalows correspondants :
+    <ol>
+        <li *ngFor="let bungalow of bungalows">
+            <app-bungalow [bungalow]="bungalow"></app-bungalow>
+        </li>
+    </ol>
+</ng-template>
+<ng-template #empty_state>
+    Aucun bungalow ne correspond aux critères indiqués.
+</ng-template>
