@@ -21,7 +21,7 @@ export class BungalowSearchComponent implements OnInit {
   search(){
   this.bungalowService.getBungalows(this.bungalow).subscribe(bungalowRes => {
         if(!bungalowRes.err){
-            this.router.navigate(['/list',bungalowRes.bungalows]);
+            this.router.navigate(['/list', JSON.stringify(bungalowRes.bungalows)]);
     }
     else console.log(bungalowRes.err);
   })

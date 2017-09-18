@@ -39,9 +39,8 @@ export class BungalowService {
       return this.http.get(`${env.appUrl}/bungalows?bedcount=${bungalow.bedcount}&islandid=${bungalow.islandid}&maxprice=${bungalow.price}`)
         .map(res => {
           const body: any = res.json();
-          if(body._embedded)
-            return { err: null, bungalows: body._embedded.bungalows};
-          return { err: null, bungalows: []};
+          return { err: null, bungalows: body};
+          //return { err: null, bungalows: []};
         })
         .catch(err => {
           console.log('Server error: ' + JSON.stringify(err, null, 2));
