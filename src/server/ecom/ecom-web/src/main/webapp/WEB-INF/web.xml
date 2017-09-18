@@ -2,19 +2,11 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
  	<display-name>rest</display-name>
-	<servlet>
-		<servlet-name>WelcomeServlet</servlet-name>
-		<servlet-class>servlets.WelcomeServlet</servlet-class>
-	</servlet>
  	<servlet>
-  		<display-name>BungalowsServlet</display-name>
+  		<display-name>Bungalows</display-name>
   		<servlet-name>BungalowsServlet</servlet-name>
   		<servlet-class>servlets.BungalowsServlet</servlet-class>
  	</servlet>
- 	<servlet-mapping>
-  		<servlet-name>WelcomeServlet</servlet-name>
-  		<url-pattern>/welcome</url-pattern>
- 	</servlet-mapping>
  	<servlet-mapping>
 		<servlet-name>BungalowsServlet</servlet-name>
 		<url-pattern>/bungalows</url-pattern>
