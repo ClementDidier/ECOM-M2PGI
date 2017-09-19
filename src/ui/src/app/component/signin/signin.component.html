@@ -1,17 +1,17 @@
-<form id="signinForm">
+<form id="signinForm" (ngSubmit)="signin()">
     <div class="form-group">
         <label for="mailLabel">Adresse email (nom de compte)</label>
-        <input type="email" class="form-control" id="mailInput" aria-describedby="emailHelp" placeholder="Adresse email">
+        <input type="email" class="form-control" id="mailInput" aria-describedby="emailHelp" placeholder="Adresse email" [(ngModel)]="user.mail">
         <small id="emailHelp" class="form-text text-muted"></small>
     </div>
     <div class="row">
         <div class="col">
             <label for="firstnameInput" class="col-form-label">Nom</label>
-            <input id="firstnameInput" type="text" class="form-control" placeholder="Nom">
+            <input id="firstnameInput" type="text" class="form-control" placeholder="Nom" [(ngModel)]="user.firstname">
         </div>
         <div class="col">
             <label for="lastnameInput" class="col-form-label">Prénom</label>
-            <input id="lastnameInput" type="text" class="form-control" placeholder="Prénom">
+            <input id="lastnameInput" type="text" class="form-control" placeholder="Prénom" [(ngModel)]="user.lastname">
         </div>
     </div>
     <div class="group">

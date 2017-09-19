@@ -1,6 +1,5 @@
 package bean.sessions;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -8,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import jobs.Bungalow;
 import jobs.User;
 
 @Stateless
@@ -23,6 +21,7 @@ public class UserBean implements IUserBean
 		
 	}
 
+	// TODO : To Test
 	@Override
 	/**
 	 * Obtient un utilisateur par son identifiant, null dans le cas où l'utilisateur n'existe pas
@@ -43,6 +42,7 @@ public class UserBean implements IUserBean
 			return users.get(0);
 	}
 
+	// TODO : Doc & test
 	@Override
 	public User getUser(String mail) 
 	{

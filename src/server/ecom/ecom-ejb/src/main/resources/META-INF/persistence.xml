@@ -23,6 +23,7 @@
    <persistence-unit name="primary">
       <jta-data-source>java:jboss/datasources/EcomDS</jta-data-source>
       <class>jobs.Bungalow</class>
+      <class>jobs.User</class>
 	  <exclude-unlisted-classes>false</exclude-unlisted-classes>
       <properties>
          <!-- Properties for Hibernate -->
