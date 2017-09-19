@@ -1,15 +1,27 @@
 <form (ngSubmit)="search()" >
     <div>
-        <span>Nombre de places:</span>
-        <span><input type="number" name="place" id="places" [(ngModel)]="bungalow.bedcount"></span>
+        <span>Nombre de lits minimums:</span>
+        <span><input type="number" name="minbedcount" id="minbedcount" [(ngModel)]="bungalowsearch.minbedcount"></span>
     </div>
     <div>
-        <span>Numéro de l'ile:</span>
-        <span><input type="number" name="ile" id="ile" [(ngModel)]="bungalow.islandid"></span>
+        <span>Île:</span>
+        <span><input type="number" name="islandid" id="islandid" [(ngModel)]="bungalowsearch.islandid"></span>
     </div>
     <div>
-        <span>Prix max:</span>
-        <span><input type="number" name="prix" id="prix" [(ngModel)]="bungalow.price"></span>
+        <span>Prix minimum:</span>
+        <span><input type="number" name="minprice" id="minprice" [(ngModel)]="bungalowsearch.minprice"></span>
+    </div>
+    <div>
+        <span>Prix maximum:</span>
+        <span><input type="number" name="maxprice" id="maxprice" [(ngModel)]="bungalowsearch.maxprice"></span>
+    </div>
+    <div>
+        <span>Semaine de début:</span>
+        <span><input type="number" name="startweek" id="startweek" [(ngModel)]="bungalowsearch.startweek"></span>
+    </div>
+    <div>
+        <span>Semaine de fin:</span>
+        <span><input type="number" name="endweek" id="endweek" [(ngModel)]="bungalowsearch.endweek"></span>
     </div>
     <button type="submit">Rechercher</button>
 </form>

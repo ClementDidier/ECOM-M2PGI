@@ -3,12 +3,14 @@ import { Http, Response} from '@angular/http';
 import { environment as env } from '../../environments/environment';
 import { Observable } from 'rxjs/Rx';
 import { Bungalow } from './../model/bungalow';
+import { BungalowSearch } from './../model/bungalow-search';
+
 @Injectable()
 export class BungalowService {
 
   constructor(private http: Http) { }
 
-  public all(): Observable<BungalowsResponse> {
+  public getAllBungalows(): Observable<BungalowsResponse> {
     return this.http.get(`${env.appUrl}/bungalows`)
       .map(res => {
         const body: any = res.json();
@@ -35,11 +37,17 @@ export class BungalowService {
         })
         ;
     }
-    public getBungalows(bungalow: Bungalow) : Observable<BungalowsResponse> {
-      return this.http.get(`${env.appUrl}/bungalows?bedcount=${bungalow.bedcount}&islandid=${bungalow.islandid}&maxprice=${bungalow.price}`)
+    public getBungalows(bungalowsearch: BungalowSearch) : Observable<BungalowsSearchResponse> {
+      return this.http.get(`${env.appUrl}/bungalows?minbedcount=${bungalowsearch.minbedcount}
+                                                    &islandid=${bungalowsearch.islandid}
+                                                    &minprice=${bungalowsearch.minprice}
+                                                    &maxprice=${bungalowsearch.maxprice}
+                                                    &startweek=${bungalowsearch.startweek}
+                                                    &endweek=${bungalowsearch.endweek}
+                                                    `)
         .map(res => {
           const body: any = res.json();
-          return { err: null, bungalows: body};
+          return { err: null, bungalows:JSON.stringify(body,null,1)};
           //return { err: null, bungalows: []};
         })
         .catch(err => {
@@ -52,6 +60,10 @@ export class BungalowService {
 }
 
 export interface BungalowsResponse {
+  err: any;
+  bungalows: Bungalow[];
+}
+export interface BungalowsSearchResponse {
   err: any;
   bungalows: Bungalow[];
 }
