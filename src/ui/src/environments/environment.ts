@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
   serverUrl: 'http://localhost:4200',
-  appUrl: 'http://localhost:4200/rest'
+  appUrl: 'http://localhost:4200/ecom-web'
 
 };
