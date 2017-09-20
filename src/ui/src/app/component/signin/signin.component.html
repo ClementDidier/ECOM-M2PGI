@@ -1,44 +1,44 @@
 <form id="signinForm" (ngSubmit)="signin()">
     <div class="form-group">
         <label for="mailLabel">Adresse email (nom de compte)</label>
-        <input type="email" class="form-control" id="mailInput" aria-describedby="emailHelp" placeholder="Adresse email" [(ngModel)]="user.mail">
+        <input type="email" class="form-control" id="mailInput" aria-describedby="emailHelp" placeholder="Adresse email" [(ngModel)]="user.mail" name="mail">
         <small id="emailHelp" class="form-text text-muted"></small>
     </div>
     <div class="row">
         <div class="col">
             <label for="firstnameInput" class="col-form-label">Nom</label>
-            <input id="firstnameInput" type="text" class="form-control" placeholder="Nom" [(ngModel)]="user.firstname">
+            <input id="firstnameInput" type="text" class="form-control" placeholder="Nom" [(ngModel)]="user.firstname" name="firstname">
         </div>
         <div class="col">
             <label for="lastnameInput" class="col-form-label">Prénom</label>
-            <input id="lastnameInput" type="text" class="form-control" placeholder="Prénom" [(ngModel)]="user.lastname">
+            <input id="lastnameInput" type="text" class="form-control" placeholder="Prénom" [(ngModel)]="user.lastname" name="lastname">
         </div>
     </div>
     <div class="group">
         <label for="inputAddress" class="col-form-label">Adresse</label>
-        <input type="text" class="form-control" id="addressInput" placeholder="3 rue St Martin">
+        <input type="text" class="form-control" id="addressInput" placeholder="3 rue St Martin" [(ngModel)]="user.address" name="address">
     </div>
     <div class="row">
         <div class="col-md-2">
             <label for="inputZip" class="col-form-label">Code postal</label>
-            <input id="postalcodeInput" type="text" class="form-control" placeholder="Code postal">
+            <input id="postalcodeInput" type="text" class="form-control" placeholder="Code postal" [(ngModel)]="user.postal" name="postal">
         </div>
         <div class="col-md-6">
             <label for="inputCity" class="col-form-label">Ville</label>
-            <input id="cityInput" type="text" class="form-control" placeholder="Ville">
+            <input id="cityInput" type="text" class="form-control" placeholder="Ville"  [(ngModel)]="user.city" name="city">
         </div>
         <div class="col">
             <label for="inputState" class="col-form-label">Pays</label>
-            <input id="countryInput" type="text" class="form-control" placeholder="Pays">
+            <input id="countryInput" type="text" class="form-control" placeholder="Pays" [(ngModel)]="user.country" name="country">
         </div>
     </div>
     <div class="group">
         <label for="exampleInputPassword1">Mot de passe</label>
-        <input type="password" class="form-control" id="passwordInput1" placeholder="Mot de passe">
+        <input type="password" class="form-control" id="passwordInput1" placeholder="Mot de passe" [(ngModel)]="user.password" name="password">
     </div>
     <div class="group">
         <label for="exampleInputPassword1">Confirmer mot de passe</label>
-        <input type="password" class="form-control" id="passwordInput2" placeholder="Mot de passe">
+        <input type="password" class="form-control" id="passwordInput2" placeholder="Mot de passe" name="password">
     </div>
     <!-- <div class="form-check">
         <label class="form-check-label">

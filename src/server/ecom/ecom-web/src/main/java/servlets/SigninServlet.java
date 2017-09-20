@@ -1,12 +1,15 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
 
 import bean.sessions.IBungalowsBean;
 import bean.sessions.UserBean;
@@ -44,12 +47,27 @@ public class SigninServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String mail = request.getParameter("mail");
+		String requestBody = request.getReader().lines().collect(Collectors.joining());
+		JSONObject obj = new JSONObject(requestBody);
+		String mail = (String) obj.get("mail");
+		String firstname = (String) obj.get("firstname");
+		String lastname = (String) obj.get("lastname");
+		String address = (String) obj.get("address");
+		String postal = (String) obj.get("postal");
+		String city = (String) obj.get("city");
+		String country = (String) obj.get("country");
+		while(obj.keys().hasNext())
+		{
+			String k = obj.keys().next();
+			System.out.println(k);
+		}
+		
 		if(mail != null)
 		{
 			// TODO : Not tested
 			User user = this.userBean.getUser(mail);
-			System.out.println(user.toJson());
+			if(user != null)
+				System.out.println(user.toJson());
 		}
 		else System.out.println("MAIL NULL");
 	}

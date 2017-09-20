@@ -14,8 +14,15 @@ export class UserService {
       var formData = {
           'mail' : user.mail,
           'firstname' : user.firstname,
-          'lastname' : user.lastname
+          'lastname' : user.lastname,
+          'address' : user.address,
+          'postal' : user.postal,
+          'city' : user.city,
+          'country' : user.country,
+          'password' : user.password // TODO : HACHAGE !!!!!!!
       };
+
+      console.log(formData);
 
       return this.http.post(`${env.appUrl}/signin`, formData)
           .map(res => {

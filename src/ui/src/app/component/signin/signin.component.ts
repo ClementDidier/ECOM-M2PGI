@@ -16,10 +16,19 @@ export class SigninComponent implements OnInit
 
     ngOnInit()
     {
-        this.user = { 'mail' : '', 'firstname' : '', 'lastname': '' };
+        this.user = {
+            'mail' : '',
+            'firstname' : '',
+            'lastname': '',
+            postahl: '',
+            'address': '',
+            'city': '',
+            'country' : '',
+            'password' : ''
+        };
     }
 
-    search()
+    signin()
     {
         this.userService.createUser(this.user).subscribe(res =>
         {
