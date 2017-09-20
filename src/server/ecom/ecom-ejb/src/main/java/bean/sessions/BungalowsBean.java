@@ -37,7 +37,6 @@ public class BungalowsBean implements IBungalowsBean {
 		
 		@SuppressWarnings("unchecked")
 		Collection<Bungalow> bungalows = (Collection<Bungalow>) queryBungalows.getResultList();
-		
 		return bungalows;
 	}
 
@@ -65,14 +64,25 @@ public class BungalowsBean implements IBungalowsBean {
 	/**
 	 * Obtient la liste des bungalows disponibles dans la base de données et disposant d'un nombre de lits définit, d'un prix inférieur au prix donné et d'une localisation équivalente à celle spécifiée
 	 */
-	public Collection<Bungalow> getBungalows(Integer bedcount, Integer maxprice, Integer islandid) 
+	public Collection<Bungalow> getBungalows(Integer minbedcount, Integer islandid, Integer minprice,Integer  maxprice,Integer startweek,Integer endweek) 
 	{
 		@SuppressWarnings("unchecked")
 		Collection<Bungalow> resultList = (Collection<Bungalow>) manager.createQuery(
-			    " FROM Bungalow b WHERE b.bedCount=:bedcount AND b.islandId=:islandid AND b.price <= :maxprice")
-			    .setParameter("bedcount", bedcount)
+			    " FROM Bungalow b WHERE b.bedCount>=:minbedcount AND b.islandId=:islandid AND b.price <= :maxprice AND b.price>=:minprice"
+			    + "		AND b.bungalowId NOT IN "
+			    + "							(SELECT l.bungalowId"
+			    + "							FORM Location l"
+			    + "							WHERE (l.semArrivee >= :startweek"
+			    + "							AND l.semArrivee<= :endweek)"
+			    + "							OR	"
+			    + "							(l.semArrivee + l.nbrSemaines>=:startweek"
+			    + "							AND l.semArrivee + l.nbrSemainres<=endweek))")
+			    .setParameter("minbedcount", minbedcount)
 			    .setParameter("islandid", islandid)
+			    .setParameter("minprice", minprice)
 			    .setParameter("maxprice", maxprice)
+			    .setParameter("startweek", startweek)
+			    .setParameter("endweek", endweek)
 			    .getResultList();
 		
 		return resultList;

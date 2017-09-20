@@ -38,13 +38,7 @@ export class BungalowService {
         ;
     }
     public getBungalows(bungalowsearch: BungalowSearch) : Observable<BungalowsSearchResponse> {
-      return this.http.get(`${env.appUrl}/bungalows?minbedcount=${bungalowsearch.minbedcount}
-                                                    &islandid=${bungalowsearch.islandid}
-                                                    &minprice=${bungalowsearch.minprice}
-                                                    &maxprice=${bungalowsearch.maxprice}
-                                                    &startweek=${bungalowsearch.startweek}
-                                                    &endweek=${bungalowsearch.endweek}
-                                                    `)
+      return this.http.get(`${env.appUrl}/bungalows?minbedcount=${bungalowsearch.minbedcount}&islandid=${bungalowsearch.islandid}&minprice=${bungalowsearch.minprice}&maxprice=${bungalowsearch.maxprice}&startweek=${bungalowsearch.startweek}&endweek=${bungalowsearch.endweek}`)
         .map(res => {
           const body: any = res.json();
           return { err: null, bungalows:JSON.stringify(body,null,1)};

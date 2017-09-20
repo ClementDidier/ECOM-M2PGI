@@ -63,18 +63,30 @@ public class BungalowsServlet extends HttpServlet
 			return;
 		}
 		
-		/* REQUEST GET [bedcount, maxprice, islandname] */
-		Integer bedcount = ParameterConverter.getIntegerOf(request.getParameter("bedcount"));
-		Integer maxprice = ParameterConverter.getIntegerOf(request.getParameter("maxprice"));
+		/* REQUEST GET [
+  minbedcount: number;
+  islandid:number;
+  minprice:number;
+  maxprice:number;
+  startweek:number;
+  endweek:number;
+  ]
+   */
+		Integer minbedcount = ParameterConverter.getIntegerOf(request.getParameter("minbedcount"));
 		Integer islandid = ParameterConverter.getIntegerOf(request.getParameter("islandid"));
-		if(bedcount != null && maxprice != null && islandid != null)
+		Integer minprice = ParameterConverter.getIntegerOf(request.getParameter("minprice"));
+		Integer maxprice = ParameterConverter.getIntegerOf(request.getParameter("maxprice"));
+		Integer startweek = ParameterConverter.getIntegerOf(request.getParameter("startweek"));
+		Integer endweek = ParameterConverter.getIntegerOf(request.getParameter("endweek"));
+
+		if(minbedcount != null && islandid !=null && minprice !=null & maxprice != null && startweek != null && endweek != null)
 		{
-			Collection<Bungalow> bungalows = this.bungalowBean.getBungalows(bedcount,  maxprice,  islandid);
+			Collection<Bungalow> bungalows = this.bungalowBean.getBungalows(minbedcount,islandid,minprice,  maxprice, startweek, endweek);
 			response.getWriter().append(this.convertToJson(bungalows).toString());
 			return;
 		}
 		// La requête est invalide si un seul des paramètres de la requête précédante existe
-		else if(bedcount != null || maxprice != null || islandid != null)
+		else if(!(minbedcount != null && islandid !=null && minprice !=null & maxprice != null && startweek != null && endweek != null))
 		{
 			Collection<Bungalow> bungalows = null;
 			response.getWriter().append(this.convertToJson(bungalows).toString());

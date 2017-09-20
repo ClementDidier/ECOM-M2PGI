@@ -11,5 +11,6 @@ public interface IBungalowsBean
 {
 	public Collection<Bungalow> getBungalows();
 	public Bungalow getBungalows(Integer id);
-	public Collection<Bungalow> getBungalows(Integer bedCount, Integer maxPrice, Integer islandId);
+	public Collection<Bungalow> getBungalows(Integer minbedcount, Integer islandid, Integer minprice, Integer maxprice,
+			Integer startweek, Integer endweek);
 }
