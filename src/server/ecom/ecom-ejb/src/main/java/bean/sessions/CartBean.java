@@ -24,9 +24,6 @@ public class CartBean implements ICartBean
 	@Override
 	public void initialize() {
 		this.items = new ArrayList<CartItem>();
-		
-		// TODO : Test cart
-		this.items.add(new CartItem(new Bungalow(2, 3, 400), 12, 13, 1));
 	}
 
 	@Override
@@ -43,11 +40,14 @@ public class CartBean implements ICartBean
 	public Collection<CartItem> getContents() {
 		return this.items;
 	}
-
+	
+	@Override
+	public void removeAllItems() {
+		this.items.clear();
+	}
+	
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		this.items.clear();
 	}
-
 }

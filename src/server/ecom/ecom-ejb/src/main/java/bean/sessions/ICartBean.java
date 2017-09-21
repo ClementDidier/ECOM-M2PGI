@@ -13,5 +13,6 @@ public interface ICartBean
 	public void addItem(CartItem item);
 	public void removeItem(CartItem item);
 	public Collection<CartItem> getContents();
+	public void removeAllItems();
 	public void dispose();
 }

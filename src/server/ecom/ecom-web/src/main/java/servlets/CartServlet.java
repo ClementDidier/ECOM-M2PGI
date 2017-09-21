@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
+import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -14,8 +15,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import bean.sessions.IBungalowsBean;
 import bean.sessions.ICartBean;
 import jobs.CartItem;
+import jpa.entities.Bungalow;
 import utils.Converter;
 
 /**
@@ -24,6 +27,13 @@ import utils.Converter;
 public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private static final String CART_SESSION_KEY = "cartSessionKey";
+    private static final int ADD_CART_ITEM_REQUEST_ID 	= 1;
+	private static final int EMPTY_CART_REQUEST_ID 		= 2;
+	private static final int VALID_CART_REQUEST_ID 		= 3;
+    
+    @EJB(lookup="java:global/ecom-ear/ecom-ejb/BungalowsBean!bean.sessions.IBungalowsBean")
+	private IBungalowsBean bungalowBean;
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,13 +41,11 @@ public class CartServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
-		ICartBean cartBean = (ICartBean) request.getSession().getAttribute(CART_SESSION_KEY);
+    
+    // Appel exclusivement en doGet et doPost (ThreadSafe)
+    private ICartBean getCartBean(HttpServletRequest request)
+    {
+    	ICartBean cartBean = (ICartBean) request.getSession().getAttribute(CART_SESSION_KEY);
 		if(cartBean == null)
 		{
 			try 
@@ -45,14 +53,22 @@ public class CartServlet extends HttpServlet {
 				InitialContext context = new InitialContext();
 				cartBean = (ICartBean) context.lookup("global/ecom-ear/ecom-ejb/CartBean!bean.sessions.ICartBean");
 				request.getSession().setAttribute(CART_SESSION_KEY, cartBean);
-				System.out.println("NEW CART !");
 			} 
 			catch (NamingException e) 
 			{
 				e.printStackTrace();
-				response.getWriter().append("500 - Erreur serveur");
 			}
-		} else System.out.println("REUSE EXISTING CART");
+		}
+		
+		return cartBean;
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		ICartBean cartBean = this.getCartBean(request);
 		
 		JSONArray array = new JSONArray();
 		for(CartItem item : cartBean.getContents())
@@ -68,25 +84,67 @@ public class CartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		String requestBody = request.getReader().lines().collect(Collectors.joining());
-		
+		JSONObject obj = new JSONObject(requestBody);
+		Integer requestId = Converter.getIntegerOf((String) obj.get("requestid"));
+
 		try 
 		{
-			JSONObject obj = new JSONObject(requestBody);
-			String bungalowId = (String) obj.get("bungalowid");
-			String startWeek = (String) obj.get("startweek");
-			String endWeek = (String) obj.get("endweek");
-			String duration = (String) obj.get("duration");
+			if(requestId == null)
+				throw new Exception("L'identifiant de requête est invalide");
 			
-			while(obj.keys().hasNext())
+			switch(requestId)
 			{
-				String k = obj.keys().next();
-				System.out.println(k);
+				case ADD_CART_ITEM_REQUEST_ID:
+					this.doPostAddCartItem(request, obj);
+					break;
+				case EMPTY_CART_REQUEST_ID:
+					this.doPostEmptyCart(request, obj);
+					break;
+				case VALID_CART_REQUEST_ID:
+					this.doPostValidCart(request, obj);
+					break;
 			}
+			
+			response.getWriter().append("{ \"state\" : \"1\" }");
 		}
-		catch (JSONException e)
+		catch (Exception e)
 		{
-			response.getWriter().append("400 - Bad request (Arguments error)");
+			response.getWriter().append("{\"state\": \"0\", \"msg\" : \"" + e.getMessage() + "\" }");
 		}
 	}
 
+	private void doPostAddCartItem(HttpServletRequest request, JSONObject reqObject) throws Exception
+	{
+		Integer bungalowId = Converter.getIntegerOf((String) reqObject.get("bungalowid"));
+		Integer startweek = Converter.getIntegerOf((String) reqObject.get("startweek"));
+		Integer endweek = Converter.getIntegerOf((String) reqObject.get("endweek"));
+		Integer duration = Converter.getIntegerOf((String) reqObject.get("duration"));
+		
+		if(startweek > endweek)
+			throw new Exception("Impossible de réaliser la requête, la date de début de location est supérieure à la date de fin");
+		
+		if(bungalowId == null)
+			throw new Exception("Impossible d'interprêter l'identifiant donné, convertion impossible");
+		
+		if(this.bungalowBean.getBungalows(bungalowId) == null)
+			throw new Exception("Le bungalow n'existe pas");
+			
+		Bungalow bungalow = this.bungalowBean.getBungalowNotRented(bungalowId, startweek, endweek);
+		if(bungalow == null)
+			throw new Exception("Le bungalow n'est pas disponible pour la période demandée");
+		
+		ICartBean cartBean = this.getCartBean(request);
+		cartBean.addItem(new CartItem(bungalow, startweek, endweek, duration));
+	}
+	
+	private void doPostEmptyCart(HttpServletRequest request, JSONObject reqObject)
+	{
+		ICartBean cartBean = this.getCartBean(request);
+		cartBean.removeAllItems();
+	}
+	
+	private void doPostValidCart(HttpServletRequest request, JSONObject reqObject)
+	{
+		// TODO : À réaliser
+	}
 }
