@@ -12,12 +12,12 @@ export class CartService {
   public getCart(): Observable<CartResponse> {
     return this.http.get(`${env.appUrl}/cart`)
       .map(res => {
-        const body: any = res.json();
+        const body: any = res["_body"].json();
         return { err: null, cartitems: body};
       })
       .catch(err => {
         console.log('Server error: ' + JSON.stringify(err, null, 2));
-        return Observable.of({err: err, bungalows: null});
+        return Observable.of({err: JSON.stringify(err, null, 2), cartitems: null});
       })
       ;
     }
