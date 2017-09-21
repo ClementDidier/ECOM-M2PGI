@@ -5,6 +5,7 @@ import { SigninComponent } from './component/signin/signin.component';
 import { BungalowComponent } from './component/bungalow/bungalow.component';
 import { BungalowService } from './service/bungalow.service';
 import { UserService } from './service/user.service';
+import { CartService } from './service/cart.service';
 import { BungalowSearchComponent } from './component/bungalow-search/bungalow-search.component';
 import { BungalowListComponent } from './component/bungalow-list/bungalow-list.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -37,7 +38,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [BungalowService, UserService],
+  providers: [BungalowService, UserService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

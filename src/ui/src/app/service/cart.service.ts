@@ -13,7 +13,7 @@ export class CartService {
     return this.http.get(`${env.appUrl}/cart`)
       .map(res => {
         const body: any = res.json();
-        return { err: null, cartItems: body};
+        return { err: null, cartitems: body};
       })
       .catch(err => {
         console.log('Server error: ' + JSON.stringify(err, null, 2));
@@ -25,5 +25,5 @@ export class CartService {
 
 export interface CartResponse {
   err: any;
-  cartItems: CartItem[];
+  cartitems: CartItem[];
 }

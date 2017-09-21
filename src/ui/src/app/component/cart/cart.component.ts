@@ -13,10 +13,10 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.cartService.getCart().subscribe(cartRes => {
           if(!cartRes.err){
-            this.cart.cartItems = cartRes.cartItems;
+            this.cart.cartitems = cartRes.cartitems;
             this.cart.totalprice = 0;
-            for(let cartItem of this.cart.cartItems){
-              this.cart.totalprice += cartItem.bungalow.price * cartItem.duration;
+            for(let cartItem of this.cart.cartitems){
+              this.cart.totalprice += cartItem.bungalow.weekprice * cartItem.duration;
             }
       }
       else console.log(cartRes.err);
