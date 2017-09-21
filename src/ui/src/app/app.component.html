@@ -1,9 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
-kikooo
+<img src="../assets/img/logo.png"/>
 
-<div class="menu">
-    <span class="nav"><a routerLink="/list">List</a></span>
-    <span class="nav"><a routerLink="search">Search</a></span>
-    <span class="nav"><a routerLink="signin">Sign-in</a></span>
+
+<div class="menu" >
+  <a routerLink="/list">  <div class="nav">List</div></a>
+  <a routerLink="signin"><div class="nav">Sign-in</div></a>
+  <div id="recap" class=" pull-right">
+      <a href="#">  <div class="route">Panier</div></a>
+      <a href="#">  <div class="route">Compte</div></a>
+  </div>
 </div>
+
+<div class="searchzone">
+  <app-bungalow-search></app-bungalow-search>
+</div>
+<div class="fildarianne"> fil d'arrianne je crois</div>
 <router-outlet></router-outlet>

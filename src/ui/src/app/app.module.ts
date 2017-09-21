@@ -17,6 +17,7 @@ const appRoutes: Routes = [
   {path : 'search', component: BungalowSearchComponent},
   {path : 'signin', component: SigninComponent}
 ]
+
 @NgModule({
   declarations: [
     AppComponent,
