@@ -42,6 +42,13 @@ public class Bungalow implements IJsonSerializable, Serializable
 		super();
 	}
 	
+	public Bungalow(Integer id, Integer bedCount, Integer price)
+	{
+		this.id = id;
+		this.bedCount = bedCount;
+		this.price = price;
+	}
+	
 	public Integer getId()
 	{
 		return this.id;
