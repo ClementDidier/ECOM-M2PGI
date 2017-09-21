@@ -26,7 +26,10 @@ export class CartComponent implements OnInit {
     });
   }
   validate(){
-    console.log("bisous");
+    console.log("todo : page validation");
+  }
+  emptyCart(){
+    console.log("todo : ack");
   }
 
 }
