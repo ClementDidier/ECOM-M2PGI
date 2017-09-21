@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+.main{
+    border-radius: 25px;
+}
+body{
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
