@@ -1,11 +1,15 @@
 package jobs;
 
+import java.io.Serializable;
+
 import org.json.JSONObject;
 
 import jpa.entities.Bungalow;
 
-public class CartItem implements IJsonSerializable
+public class CartItem implements IJsonSerializable, Serializable
 {
+	private static final long serialVersionUID = 1L;
+	
 	private Bungalow bungalow;
 	private Integer startWeek;
 	private Integer endWeek;

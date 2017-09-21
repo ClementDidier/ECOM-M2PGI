@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.sessions.IBungalowsBean;
 import bean.sessions.UserBean;
 import jpa.entities.User;
 

@@ -13,13 +13,14 @@ import org.json.JSONArray;
 
 import bean.sessions.ICartBean;
 import jobs.CartItem;
+import utils.Converter;
 
 /**
  * Servlet implementation class CartServlet
  */
 public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private static final String CART_SESSION_KEY = "cartSessionKey";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,28 +32,31 @@ public class CartServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		try 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		ICartBean cartBean = (ICartBean) request.getSession().getAttribute(CART_SESSION_KEY);
+		if(cartBean == null)
 		{
-			InitialContext context = new InitialContext();
-			ICartBean userBean = (ICartBean)context.lookup("global/ecom-ear/ecom-ejb/CartBean!bean.sessions.ICartBean");
-			
-			JSONArray array = new JSONArray();
-			for(CartItem item : userBean.getContents())
+			try 
 			{
-				array.put(item.toJson());
+				InitialContext context = new InitialContext();
+				cartBean = (ICartBean) context.lookup("global/ecom-ear/ecom-ejb/CartBean!bean.sessions.ICartBean");
+				request.getSession().setAttribute(CART_SESSION_KEY, cartBean);
+				System.out.println("NEW CART !");
+			} 
+			catch (NamingException e) 
+			{
+				e.printStackTrace();
+				response.getWriter().append("500 - Erreur serveur");
 			}
-			response.getWriter().append(array.toString());
-		} 
-		catch (NamingException e) 
-		{
-			e.printStackTrace();
-			response.getWriter().append("500 - Erreur serveur");
-		}
+		} else System.out.println("REUSE EXISTING CART");
 		
+		JSONArray array = new JSONArray();
+		for(CartItem item : cartBean.getContents())
+		{
+			array.put(item.toJson());
+		}
+		response.getWriter().append(Converter.formatJson(array.toString()));
 	}
 
 	/**
