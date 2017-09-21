@@ -1,4 +1,4 @@
-package jobs;
+package jpa.entities;
 
 import java.io.Serializable;
 
@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.json.JSONObject;
+
+import jobs.IJsonSerializable;
 
 @Entity @Table(name="bungalows")
 public class Bungalow implements IJsonSerializable, Serializable

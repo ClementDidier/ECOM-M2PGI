@@ -22,8 +22,8 @@
         http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
    <persistence-unit name="primary">
       <jta-data-source>java:jboss/datasources/EcomDS</jta-data-source>
-      <class>jobs.Bungalow</class>
-      <class>jobs.User</class>
+      <class>jpa.entities.Bungalow</class>
+      <class>jpa.entities.User</class>
 	  <exclude-unlisted-classes>false</exclude-unlisted-classes>
       <properties>
          <!-- Properties for Hibernate -->
