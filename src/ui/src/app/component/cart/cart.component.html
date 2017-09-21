@@ -1,0 +1,13 @@
+<div *ngIf="cartItems && cartItems.length > 0;then content else empty_state">here is ignored</div>
+
+<ng-template #content>
+  Voici ce que content votre panier :
+    <ol>
+        <li *ngFor="let cartItem of cartItems">
+            <app-cart-item [cartItem]="cartItem"></app-cart-item>
+        </li>
+    </ol>
+</ng-template>
+<ng-template #empty_state>
+Votre panier est vide !
+</ng-template>
