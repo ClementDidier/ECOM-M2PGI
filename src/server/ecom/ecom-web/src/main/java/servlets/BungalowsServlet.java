@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 
 import bean.sessions.IBungalowsBean;
-import jobs.Bungalow;
-import utils.ParameterConverter;
+import jpa.entities.Bungalow;
+import utils.Converter;
 
 /**
  * Servlet implementation class BungalowsServlet
@@ -54,7 +54,7 @@ public class BungalowsServlet extends HttpServlet
 		// Usage du langage JPQL pour la projection contre les injections
 		
 		/* REQUEST GET [id] */
-		Integer id = ParameterConverter.getIntegerOf(request.getParameter("id"));
+		Integer id = Converter.getIntegerOf(request.getParameter("id"));
 		if(id != null) 
 		{
 			Bungalow bungalow = this.bungalowBean.getBungalows(id);
@@ -64,9 +64,9 @@ public class BungalowsServlet extends HttpServlet
 		}
 		
 		/* REQUEST GET [bedcount, maxprice, islandname] */
-		Integer bedcount = ParameterConverter.getIntegerOf(request.getParameter("bedcount"));
-		Integer maxprice = ParameterConverter.getIntegerOf(request.getParameter("maxprice"));
-		Integer islandid = ParameterConverter.getIntegerOf(request.getParameter("islandid"));
+		Integer bedcount = Converter.getIntegerOf(request.getParameter("bedcount"));
+		Integer maxprice = Converter.getIntegerOf(request.getParameter("maxprice"));
+		Integer islandid = Converter.getIntegerOf(request.getParameter("islandid"));
 		if(bedcount != null && maxprice != null && islandid != null)
 		{
 			Collection<Bungalow> bungalows = this.bungalowBean.getBungalows(bedcount,  maxprice,  islandid);
@@ -76,8 +76,7 @@ public class BungalowsServlet extends HttpServlet
 		// La requête est invalide si un seul des paramètres de la requête précédante existe
 		else if(bedcount != null || maxprice != null || islandid != null)
 		{
-			Collection<Bungalow> bungalows = null;
-			response.getWriter().append(this.convertToJson(bungalows).toString());
+			response.getWriter().append(this.convertToJson(null).toString());
 			return;
 		}
 

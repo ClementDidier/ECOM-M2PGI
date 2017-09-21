@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.sessions.IBungalowsBean;
 import bean.sessions.UserBean;
-import jobs.User;
+import jpa.entities.User;
 
 /**
  * Servlet implementation class UserServlet

@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import javax.ejb.Remote;
 
-import jobs.Bungalow;
+import jpa.entities.Bungalow;
 
 @Remote
 public interface IBungalowsBean 

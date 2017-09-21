@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.ejb.Init;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import jobs.Bungalow;
+import jobs.CartItem;
+import jpa.entities.Bungalow;
 
 @Stateful
 public class CartBean implements ICartBean
@@ -16,32 +18,35 @@ public class CartBean implements ICartBean
 	@PersistenceContext(unitName="primary")
     private EntityManager manager;
 	
-	private List<Bungalow> bungalows;
+	private List<CartItem> items;
 	
 	public CartBean() 
 	{
 		
 	}
 
+	@Init
 	@Override
 	public void initialize() {
-		this.bungalows = new ArrayList<Bungalow>();
+		this.items = new ArrayList<CartItem>();
+		
+		// TODO : Test cart
+		this.items.add(new CartItem(new Bungalow(2, 3, 400), 12, 13, 1));
 	}
 
 	@Override
-	public void addBungalow(Bungalow bungalow) {
-		this.bungalows.add(bungalow);
+	public void addItem(CartItem item) {
+		this.items.add(item);
 	}
 
 	@Override
-	public void removeBungalow(Bungalow bungalow) {
-		this.bungalows.remove(bungalow);	
+	public void removeItem(CartItem item) {
+		this.items.remove(item);	
 	}
 
 	@Override
-	public Collection<Bungalow> getContents() {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<CartItem> getContents() {
+		return this.items;
 	}
 
 	@Override

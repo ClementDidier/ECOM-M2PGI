@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import bean.sessions.IBungalowsBean;
-import jobs.Bungalow;
+import jpa.entities.Bungalow;
 
 public class BungalowTest 
 {
