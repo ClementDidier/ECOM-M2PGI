@@ -1,11 +1,11 @@
-<div *ngIf="cartItem.bungalow">
-      <td>
-            <app-bungalow [bungalow]="cartItem.bungalow"></app-bungalow>
-      </td>
-      <td>
-        {{cartItem.duration}} semaine(s)
-      </td>
-      <td>
-        {{cartItem.bungalow.weekprice*cartItem.duration}}
-      </td>
-</div>
+<tr>
+  <td>
+      <app-bungalow [bungalow]="cartItem.bungalow"></app-bungalow>
+  </td>
+  <td>
+    {{cartItem.duration}} semaine(s)
+  </td>
+  <td>
+    {{cartItem.bungalow.weekprice * cartItem.duration}}
+  </td>
+</tr>
