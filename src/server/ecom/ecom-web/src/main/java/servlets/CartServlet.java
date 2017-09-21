@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import bean.sessions.ICartBean;
 import jobs.CartItem;
@@ -62,9 +65,28 @@ public class CartServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		String requestBody = request.getReader().lines().collect(Collectors.joining());
+		
+		try 
+		{
+			JSONObject obj = new JSONObject(requestBody);
+			String bungalowId = (String) obj.get("bungalowid");
+			String startWeek = (String) obj.get("startweek");
+			String endWeek = (String) obj.get("endweek");
+			String duration = (String) obj.get("duration");
+			
+			while(obj.keys().hasNext())
+			{
+				String k = obj.keys().next();
+				System.out.println(k);
+			}
+		}
+		catch (JSONException e)
+		{
+			response.getWriter().append("400 - Bad request (Arguments error)");
+		}
 	}
 
 }

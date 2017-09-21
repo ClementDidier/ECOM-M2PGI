@@ -72,9 +72,9 @@ public class Bungalow implements IJsonSerializable, Serializable
 	public String toJson() 
 	{
 		JSONObject obj = new JSONObject();
-		obj.put("BungalowId", this.getId());
-		obj.put("BedCount", this.getBedCount());
-		obj.put("WeekPrice", this.getPrice());
+		obj.put("bungalowid", this.getId());
+		obj.put("bedcount", this.getBedCount());
+		obj.put("weekprice", this.getPrice());
 		
 		return obj.toString();
 	}
