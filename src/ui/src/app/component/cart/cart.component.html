@@ -2,11 +2,17 @@
 
 <ng-template #content>
   Voici ce que content votre panier :
-    <ol>
+  <table>
         <li *ngFor="let cartItem of cartItems">
+          <tr>
             <app-cart-item [cartItem]="cartItem"></app-cart-item>
+          </tr>
         </li>
-    </ol>
+</table>
+Total : {{totalprice}}
+ <input (click)="validate()" type="button" value="Commander" />
+ <input (click)="emptyCart()" type="button" value="Vider le panier" />
+
 </ng-template>
 <ng-template #empty_state>
 Votre panier est vide !

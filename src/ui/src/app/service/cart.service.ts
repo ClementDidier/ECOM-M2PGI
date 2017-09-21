@@ -12,7 +12,8 @@ export class CartService {
   public getCart(): Observable<CartResponse> {
     return this.http.get(`${env.appUrl}/cart`)
       .map(res => {
-        const body: any = res["_body"].json();
+        console.log(res.json());
+        const body: any = res.json();
         return { err: null, cartitems: body};
       })
       .catch(err => {
@@ -21,9 +22,39 @@ export class CartService {
       })
       ;
     }
+
+public emptyCart() : Observable<CartValidateResponse>{
+  return this.http.post(`${env.appUrl}/cart`,1)
+    .map(res => {
+      const body: any = res.json();
+      return { err: null, state: body};
+    })
+    .catch(err => {
+      console.log('Server error: ' + JSON.stringify(err, null, 2));
+      return Observable.of({err: JSON.stringify(err, null, 2), state: null});
+    })
+    ;
+}
+public validateCart() : Observable<CartValidateResponse>{
+  return this.http.post(`${env.appUrl}/cart`,2)
+    .map(res => {
+      const body: any = res.json();
+      return { err: null, state: body};
+    })
+    .catch(err => {
+      console.log('Server error: ' + JSON.stringify(err, null, 2));
+      return Observable.of({err: JSON.stringify(err, null, 2), state: null});
+    })
+    ;
+}
 }
 
 export interface CartResponse {
   err: any;
   cartitems: CartItem[];
+}
+
+export interface CartValidateResponse {
+  err: any;
+  state:number;
 }
