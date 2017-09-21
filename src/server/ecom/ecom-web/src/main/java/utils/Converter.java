@@ -1,6 +1,6 @@
 package utils;
 
-public class ParameterConverter 
+public class Converter 
 {
 	/**
 	 * Obtient si possible la valeur entière de la chaîne de charactères paramètre, null dans le cas contraire
@@ -18,4 +18,9 @@ public class ParameterConverter
 			return null;
 		}
 	}
+	
+	public static String formatJson(String json)
+    {
+		return json.replace("\"{", "{").replace("\\", "").replace("}\"", "}");
+    }
 }

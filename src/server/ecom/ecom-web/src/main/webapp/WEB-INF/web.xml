@@ -14,7 +14,12 @@
 		<servlet-name>BungalowsServlet</servlet-name>
 		<servlet-class>servlets.BungalowsServlet</servlet-class>
 	</servlet>
-		<servlet>
+	<servlet>
+		<display-name>Cart</display-name>
+		<servlet-name>CartServlet</servlet-name>
+		<servlet-class>servlets.CartServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<display-name>SignIn</display-name>
 		<servlet-name>SigninServlet</servlet-name>
 		<servlet-class>servlets.SigninServlet</servlet-class>
@@ -23,6 +28,10 @@
 	   	<servlet-name>BungalowsServlet</servlet-name>
 	   	<url-pattern>/bungalows</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+    	<servlet-name>CartServlet</servlet-name>
+    	<url-pattern>/cart</url-pattern>
+  	</servlet-mapping>
 	<servlet-mapping>
     	<servlet-name>SigninServlet</servlet-name>
     	<url-pattern>/signin</url-pattern>

@@ -1,9 +1,11 @@
-package jobs;
+package jpa.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 import org.json.JSONObject;
+
+import jobs.IJsonSerializable;
 
 /**
  * Entity implementation class for Entity: User

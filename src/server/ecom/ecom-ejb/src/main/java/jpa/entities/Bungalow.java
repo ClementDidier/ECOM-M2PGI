@@ -1,4 +1,4 @@
-package jobs;
+package jpa.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.json.JSONObject;
+import jobs.IJsonSerializable;
 
 @Entity @Table(name="BUNGALOWS")
 public class Bungalow implements IJsonSerializable, Serializable
@@ -41,6 +42,13 @@ public class Bungalow implements IJsonSerializable, Serializable
 		super();
 	}
 	
+	public Bungalow(Integer id, Integer bedCount, Integer price)
+	{
+		this.id = id;
+		this.bedCount = bedCount;
+		this.price = price;
+	}
+	
 	public Integer getId()
 	{
 		return this.id;
@@ -64,9 +72,9 @@ public class Bungalow implements IJsonSerializable, Serializable
 	public String toJson() 
 	{
 		JSONObject obj = new JSONObject();
-		obj.put("BungalowId", this.getId());
-		obj.put("BedCount", this.getBedCount());
-		obj.put("WeekPrice", this.getPrice());
+		obj.put("bungalowid", this.getId());
+		obj.put("bedcount", this.getBedCount());
+		obj.put("weekprice", this.getPrice());
 		
 		return obj.toString();
 	}

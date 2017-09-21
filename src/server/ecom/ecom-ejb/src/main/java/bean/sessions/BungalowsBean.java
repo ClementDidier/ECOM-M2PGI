@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import jobs.Bungalow;
+import jpa.entities.Bungalow;
 
 /**
  * Session Bean implementation class BungalowsBean
@@ -76,5 +76,39 @@ public class BungalowsBean implements IBungalowsBean {
 			    .getResultList();
 		
 		return resultList;
+	}
+	
+	/**
+	 * Obtient le bungalow si non loué pour une période donnée
+	 * @param bungalowId L'identifiant du bungalow
+	 * @param startweek Le début de la période de location envisagée
+	 * @param endweek La fin de période de location envisagée
+	 * @return Le bungalow si non loué pour la période donnée, null dans le cas contraire
+	 */
+	public Bungalow getBungalowNotRented(Integer bungalowId, Integer startweek, Integer endweek) 
+	{
+		// Format : YEARWEEK (exemple : 201512)
+		
+		Integer weekcount = endweek - startweek;
+		
+		@SuppressWarnings("unchecked")
+		List<Bungalow> resultList = (List<Bungalow>) manager.createQuery(
+			    " FROM Bungalow b WHERE b.id=:id"
+			    + "	AND b.id NOT IN "
+			    + "(SELECT r.bungalow.id "
+			    + "FROM Rent r WHERE "
+			    + "(:startweek <= r.beginWeek AND :weekcount + :startweek >= r.beginWeek)"
+			    + "	OR "
+			    + "(:startweek >= r.beginWeek AND r.beginWeek + r.weekCount >= :startweek)"
+			    + " OR "
+			    + "(:startweek = r.beginWeek))")
+			    .setParameter("id", bungalowId)
+			    .setParameter("startweek", startweek)
+			    .setParameter("weekcount", weekcount)
+			    .getResultList();
+		
+		if(resultList.isEmpty())
+			return null;
+		return resultList.get(0);
 	}
 }

@@ -1,4 +1,4 @@
-package jobs;
+package jpa.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -6,6 +6,8 @@ import java.util.Collection;
 import javax.persistence.*;
 
 import org.json.JSONObject;
+
+import jobs.IJsonSerializable;
 
 /**
  * Entity implementation class for Entity: Island

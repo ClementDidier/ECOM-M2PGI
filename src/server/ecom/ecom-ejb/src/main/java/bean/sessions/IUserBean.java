@@ -1,6 +1,6 @@
 package bean.sessions;
 
-import jobs.User;
+import jpa.entities.User;
 
 public interface IUserBean 
 {

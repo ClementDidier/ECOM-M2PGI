@@ -1,6 +1,6 @@
 export class Bungalow {
-  id?: number;
+  bungalowid: number;
   bedcount: number;
   islandid: number;
-  price: number;
+  weekprice: number;
 }

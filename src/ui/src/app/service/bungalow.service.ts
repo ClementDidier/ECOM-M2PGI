@@ -36,7 +36,7 @@ export class BungalowService {
         ;
     }
     public getBungalows(bungalow: Bungalow) : Observable<BungalowsResponse> {
-      return this.http.get(`${env.appUrl}/bungalows?bedcount=${bungalow.bedcount}&islandid=${bungalow.islandid}&maxprice=${bungalow.price}`)
+      return this.http.get(`${env.appUrl}/bungalows?bedcount=${bungalow.bedcount}&islandid=${bungalow.islandid}&maxprice=${bungalow.weekprice}`)
         .map(res => {
           const body: any = res.json();
           return { err: null, bungalows: body};
