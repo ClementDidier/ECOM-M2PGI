@@ -12,8 +12,8 @@ import jobs.IJsonSerializable;
  *
  */
 @Entity @Table(name="RENTS")
-public class Rent implements Serializable, IJsonSerializable {
-
+public class Rent implements Serializable, IJsonSerializable 
+{
 	private static final long serialVersionUID = 1L;
 
 	@Id
