@@ -35,7 +35,8 @@ public class CORSFilter implements Filter {
 		// Cast pour l'accès aux méthodes de modification de l'entête de la réponse
 		final HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-		httpResponse.setHeader("Access-Control-Allow-Origin", "*");
+		httpResponse.addHeader("Access-Control-Allow-Origin", "*");
+		httpResponse.addHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 		
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
