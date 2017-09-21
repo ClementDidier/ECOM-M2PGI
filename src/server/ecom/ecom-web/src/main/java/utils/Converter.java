@@ -21,6 +21,6 @@ public class Converter
 	
 	public static String formatJson(String json)
     {
-		return json.replace("\"{", "{").replace("}\"", "}").replace("\\", "");
+		return json.replace("\"{", "{").replace("\\", "").replace("}\"", "}");
     }
 }
