@@ -1,48 +1,45 @@
 package jpa.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.json.JSONObject;
-
 import jobs.IJsonSerializable;
 
-@Entity @Table(name="bungalows")
+@Entity @Table(name="BUNGALOWS")
 public class Bungalow implements IJsonSerializable, Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
+	@Column(name="BungalowId")
 	private Integer id;
 	
-	@Column(name="bedCount")
+	@Column(name="BedCount")
 	private Integer bedCount;
 	
-	@Column(name="price")
+	@Column(name="WeekPrice")
 	private Integer price;
 	
-	@Column(name="islandId")
-	private Integer islandId;
+	@ManyToOne
+	private Island island;
+	
+	@OneToMany
+	private Collection<Rent> rents;
 	
 	public Bungalow()
 	{
 		super();
-	}
-	
-	public Bungalow(int bedCount, int price, Integer islandId)
-	{
-		super();
-		this.bedCount = bedCount;
-		this.price = price;
-		this.islandId = islandId;
 	}
 	
 	public Integer getId()
@@ -60,19 +57,17 @@ public class Bungalow implements IJsonSerializable, Serializable
 		return price;
 	}
 
-	public Integer getIslandId() 
-	{
-		return islandId;
+	public Island getIsland() {
+		return island;
 	}
 
 	@Override
 	public String toJson() 
 	{
 		JSONObject obj = new JSONObject();
-		obj.put("id", this.getId());
-		obj.put("bedcount", this.getBedCount());
-		obj.put("price", this.getPrice());
-		obj.put("islandid", this.getIslandId());
+		obj.put("BungalowId", this.getId());
+		obj.put("BedCount", this.getBedCount());
+		obj.put("WeekPrice", this.getPrice());
 		
 		return obj.toString();
 	}
