@@ -4,5 +4,8 @@ export class BungalowSearch {
   minprice:number;
   maxprice:number;
   startweek:number;
+  startyear:number;
   endweek:number;
+  endyear:number;
+
 }

@@ -23,12 +23,14 @@ export class BungalowSearchComponent implements OnInit {
   return Math.ceil(dayOfYear/7)
 };
 
+
   ngOnInit() {
     let thisweek = new Date();
+    let nextweek = new Date(thisweek.getDate() + 7);
 
     //TODO get list île et peupleur la recherche
     this.bungalowsearch={'minbedcount': 0, 'islandid' : 0, 'minprice':0,
-                        'maxprice':500, 'startweek':this.getWeek(thisweek),'endweek':this.getWeek(thisweek)+1};
+                        'maxprice':500, 'startweek':this.getWeek(thisweek), 'startyear' : thisweek.getFullYear(),'endweek':this.getWeek(nextweek), 'endyear': nextweek.getFullYear()};
   }
 
   search(){
