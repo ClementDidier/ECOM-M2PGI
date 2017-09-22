@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
     this.cartService.emptyCart().subscribe(validRes =>
       {
         if(validRes.state["state"]== 1){
-          console.log("la vie est belle")
+          console.log("la vie est belle");/*
           this.cartService.getCart().subscribe(cartRes => {
                 if(!cartRes.err){
                   this.cartItems = cartRes.cartitems;
@@ -56,10 +56,10 @@ export class CartComponent implements OnInit {
                   }
             }
             else console.log("Err : " + cartRes.err);
-          });
-          location.reload();
+          });*/
           //this.router.reload();
-
+          this.cartService.getCart();
+          window.location.reload();
        }
         else if(validRes.state["state"]==0){
           console.log("la vie est pas belle")

@@ -15,6 +15,7 @@ import { CartItemComponent } from './component/cart-item/cart-item.component';
 import { CartComponent } from './component/cart/cart.component';
 import { PrebookComponent } from './component/prebook/prebook.component';
 import { BookComponent } from './component/book/book.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const appRoutes: Routes = [
   {path : 'list', component: BungalowListComponent},
@@ -45,7 +46,9 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [BungalowService, UserService, CartService],
+  providers: [BungalowService, UserService, CartService,{provide: LocationStrategy, useClass: HashLocationStrategy}
+],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }
