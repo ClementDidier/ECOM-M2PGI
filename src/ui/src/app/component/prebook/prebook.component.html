@@ -1,0 +1,44 @@
+<div *ngIf="cart && cart.cartitems.length > 0;then content else empty_state">here is ignored</div>
+
+<ng-template #content>
+  Vous êtes sur le point de commander :
+  <table class="table table-striped .table-hover">
+        <thead class="thead-inverse">
+        <tr>
+          <td>Bungalow</td>
+          <td>Durée</td>
+          <td>Prix</td>
+        </tr>
+      </thead>
+      <tbody *ngFor="let cartItem of cart.cartitems">
+            <tr>
+              <td>
+                  <app-bungalow [bungalow]="cartItem.bungalow"></app-bungalow>
+              </td>
+              <td>
+                {{cartItem.duration}} semaine(s)
+              </td>
+              <td>
+                {{cartItem.bungalow.weekprice * cartItem.duration}}
+              </td>
+            </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+            Total : {{cart.totalprice}}
+          </td>
+        </tr>
+      </tbody>
+</table>
+ <input (click)="gotToPayment()" type="button" value="Commander et payer" />
+ <input (click)="Annuler()" type="button" value="Annuler" />
+
+</ng-template>
+<ng-template #empty_state>
+Jamais censé arriver
+</ng-template>

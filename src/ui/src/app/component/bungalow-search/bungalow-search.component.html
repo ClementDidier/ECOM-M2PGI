@@ -1,15 +1,41 @@
-<form (ngSubmit)="search()" >
-    <div>
-        <span>Nombre de places:</span>
-        <span><input type="number" name="place" id="places" [(ngModel)]="bungalow.bedcount"></span>
+<form id="searchForm"  (ngSubmit)="search()" >
+    <div class="group">
+       <label for="minbedcount" class="col-form-label"> Nombre de lits:</label>
+        <input type="number" class="form-control" name="minbedcount" id="minbedcount" aria-describedby="nombreLits" placeholder="Nombre de lits" [(ngModel)]="bungalowsearch.minbedcount">
     </div>
-    <div>
-        <span>Numéro de l'ile:</span>
-        <span><input type="number" name="ile" id="ile" [(ngModel)]="bungalow.islandid"></span>
+    <div class="group">
+      <label for="islandid"> Île:</label>
+        <input type="number" class="form-control" name="islandid" id="islandid"  aria-describedby="ile" placeholder="Île"  [(ngModel)]="bungalowsearch.islandid">
     </div>
-    <div>
-        <span>Prix max:</span>
-        <span><input type="number" name="prix" id="prix" [(ngModel)]="bungalow.price"></span>
+    <div class="group">
+        <label for="minprice" class="col-form-label"> Prix minimum:</label>
+        <input type="number" class="form-control" name="minprice" id="minprice" aria-describedby="prixmini" placeholder="Prix minimum" [(ngModel)]="bungalowsearch.minprice">
     </div>
+<<<<<<< HEAD
     <button  class="btn btn-info btn-lg" type="submit">Rechercher</button>
+=======
+    <div class="group">
+        <label for="maxprice" class="col-form-label"> Prix maximum:</label>
+        <input type="number" class="form-control" name="maxprice" id="maxprice" aria-describedby="prixmax" placeholder="Prix maximum"  [(ngModel)]="bungalowsearch.maxprice">
+    </div>
+    <br/>
+    <div class="group">
+        <label for="startweek" class="col-form-label"> Semaine de début:</label>
+        <input type="number" class="form-control" name="startweek" id="startweek" aria-describedby="semdebut" placeholder="Semaine de début de la location"  [(ngModel)]="bungalowsearch.startweek">
+    </div>
+    <div class="group">
+        <label for="startweek" class="col-form-label"> Année de début:</label>
+        <input type="number" class="form-control" name="startyear" id="startyear" aria-describedby="yeardebut" placeholder="Année de début de la location"  [(ngModel)]="bungalowsearch.startyear">
+    </div>
+    <div class="group">
+        <label for="endweek" class="col-form-label"> Semaine de fin:</label>
+        <input type="number"  class="form-control" name="endweek" id="endweek" aria-describedby="semfin" placeholder="Semaine de fin de la location"  [(ngModel)]="bungalowsearch.endweek">
+    </div>
+    <div class="group">
+        <label for="startweek" class="col-form-label"> Année de fin:</label>
+        <input type="number" class="form-control" name="endyear" id="endyear" aria-describedby="yearfin" placeholder="Année de fin de la location"  [(ngModel)]="bungalowsearch.endyear">
+    </div>
+    <br/>
+    <button type="submit"  class="btn btn-primary">Rechercher</button>
+>>>>>>> espace-recherche
 </form>
