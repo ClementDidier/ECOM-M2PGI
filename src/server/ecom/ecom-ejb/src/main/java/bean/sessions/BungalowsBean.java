@@ -95,13 +95,19 @@ public class BungalowsBean implements IBungalowsBean {
 		List<Bungalow> resultList = (List<Bungalow>) manager.createQuery(
 			    " FROM Bungalow b WHERE b.id=:id"
 			    + "	AND b.id NOT IN "
-			    + "(SELECT r.bungalow.id "
-			    + "FROM Rent r WHERE "
-			    + "(:startweek < r.beginWeek AND :weekcount + :startweek > r.beginWeek)"
+			    + "(SELECT r.bungalow.id FROM Rent r WHERE "
+			    + "((:startweek < r.beginWeek AND :weekcount + :startweek > r.beginWeek)"
 			    + "	OR "
 			    + "(:startweek >= r.beginWeek AND r.beginWeek + r.weekCount > :startweek)"
 			    + " OR "
-			    + "(:startweek = r.beginWeek))")
+			    + "(:startweek = r.beginWeek)))"
+			    + " AND b.id NOT IN "
+			    + "(SELECT tmp.bungalowId FROM TempOrder tmp WHERE"
+			    + "((:startweek < tmp.startWeek AND :weekcount + :startweek > tmp.startWeek)"
+			    + " OR " 
+			    + "(:startweek >= tmp.startWeek AND tmp.endWeek > :startweek)"
+			    + " OR "
+			    + "(:startweek = tmp.startWeek)))")
 			    .setParameter("id", bungalowId)
 			    .setParameter("startweek", startweek)
 			    .setParameter("weekcount", weekcount)

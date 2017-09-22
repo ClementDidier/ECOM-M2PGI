@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
@@ -46,6 +47,7 @@ public class CartServlet extends HttpServlet {
     private ICartBean getCartBean(HttpServletRequest request)
     {
     	ICartBean cartBean = (ICartBean) request.getSession().getAttribute(CART_SESSION_KEY);
+    	System.out.println(request.getSession().getId());
 		if(cartBean == null)
 		{
 			try 
@@ -95,17 +97,15 @@ public class CartServlet extends HttpServlet {
 			switch(requestId)
 			{
 				case ADD_CART_ITEM_REQUEST_ID:
-					this.doPostAddCartItem(request, obj);
+					this.doPostAddCartItem(request, response, obj);
 					break;
 				case EMPTY_CART_REQUEST_ID:
-					this.doPostEmptyCart(request, obj);
+					this.doPostEmptyCart(request, response, obj);
 					break;
 				case VALID_CART_REQUEST_ID:
-					this.doPostValidCart(request, obj);
+					this.doPostValidCart(request, response, obj);
 					break;
 			}
-			
-			response.getWriter().append("{ \"state\" : \"1\" }");
 		}
 		catch (Exception e)
 		{
@@ -113,7 +113,7 @@ public class CartServlet extends HttpServlet {
 		}
 	}
 
-	private void doPostAddCartItem(HttpServletRequest request, JSONObject reqObject) throws Exception
+	private void doPostAddCartItem(HttpServletRequest request, HttpServletResponse response, JSONObject reqObject) throws Exception
 	{
 		Integer bungalowId = Converter.getIntegerOf((String) reqObject.get("bungalowid"));
 		Integer startweek = Converter.getIntegerOf((String) reqObject.get("startweek"));
@@ -135,16 +135,27 @@ public class CartServlet extends HttpServlet {
 		
 		ICartBean cartBean = this.getCartBean(request);
 		cartBean.addItem(new CartItem(bungalow, startweek, endweek, duration));
+		
+		response.getWriter().append("{ \"state\" : \"1\" }");
 	}
 	
-	private void doPostEmptyCart(HttpServletRequest request, JSONObject reqObject)
+	private void doPostEmptyCart(HttpServletRequest request, HttpServletResponse response, JSONObject reqObject) throws IOException
 	{
 		ICartBean cartBean = this.getCartBean(request);
 		cartBean.removeAllItems();
+		
+		response.getWriter().append("{ \"state\" : \"1\" }");
 	}
 	
-	private void doPostValidCart(HttpServletRequest request, JSONObject reqObject)
+	private void doPostValidCart(HttpServletRequest request, HttpServletResponse response, JSONObject reqObject) throws IOException
 	{
 		// TODO : À réaliser
+		ICartBean cartBean = this.getCartBean(request);
+		List<CartItem> validatedCarts = cartBean.validate(request.getSession().getId()); // Synchronized
+		
+		JSONArray resultArray = new JSONArray();
+		resultArray.put(validatedCarts);
+		
+		response.getWriter().append("{ \"state\" : \"1\", \"cartitems\" : " + resultArray.toString() + " }");
 	}
 }

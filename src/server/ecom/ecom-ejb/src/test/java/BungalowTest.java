@@ -61,7 +61,11 @@ public class BungalowTest
 		b = obj.getBungalowNotRented(1, 201702, 201704);
 		assertEquals("L'objet est loué pendant cette date et ne devrait pas être retourné", b, null);
 		
+		// Dans la table TEMP_ORDERS
 		b = obj.getBungalowNotRented(1, 201703, 201704);
+		assertEquals("L'objet est loué pendant cette date et ne devrait pas être retourné", b, null);
+		
+		b = obj.getBungalowNotRented(1, 201704, 201705);
 		assertNotEquals("L'objet n'est pas loué à cette date et devrait être retourné", b, null);
 	}
 }
