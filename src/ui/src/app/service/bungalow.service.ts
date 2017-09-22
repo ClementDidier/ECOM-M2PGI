@@ -12,7 +12,7 @@ export class BungalowService {
     return this.http.get(`${env.appUrl}/bungalows`)
       .map(res => {
         const body: any = res.json();
-        return { err: null, bungalows: body._embedded.bungalows};
+        return { err: null, bungalows: body};
       })
       .catch(err => {
         console.log('Server error: ' + JSON.stringify(err, null, 2));
@@ -24,9 +24,7 @@ export class BungalowService {
     public getBungalow(bungalowId: string): Observable<BungalowResponse> {
       return this.http.get(`${env.appUrl}/bungalows/${bungalowId}`)
         .map(res => {
-          console.log(res.json());
           const body: any = res.json();
-          console.log(JSON.stringify(body, null, 2));
           return { err: null, bungalow: body};
         })
         .catch(err => {
@@ -40,7 +38,6 @@ export class BungalowService {
         .map(res => {
           const body: any = res.json();
           return { err: null, bungalows: body};
-          //return { err: null, bungalows: []};
         })
         .catch(err => {
           console.log('Server error: ' + JSON.stringify(err, null, 2));
