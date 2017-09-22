@@ -12,7 +12,7 @@ export class ListComponent implements OnInit {
   constructor(private bungalowService : BungalowService,
     private router: Router,private activatedRoute: ActivatedRoute) {}
   ngOnInit() {
-    this.bungalowService.all().subscribe(bungalowRes => {
+    this.bungalowService.getAllBungalows().subscribe(bungalowRes => {
           if(!bungalowRes.err){
               console.log(bungalowRes);
               this.router.navigate(['/bungalowlist', JSON.stringify(bungalowRes)]);
