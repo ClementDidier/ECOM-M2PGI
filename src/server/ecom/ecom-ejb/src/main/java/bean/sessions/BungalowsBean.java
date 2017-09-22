@@ -97,9 +97,9 @@ public class BungalowsBean implements IBungalowsBean {
 			    + "	AND b.id NOT IN "
 			    + "(SELECT r.bungalow.id "
 			    + "FROM Rent r WHERE "
-			    + "(:startweek <= r.beginWeek AND :weekcount + :startweek >= r.beginWeek)"
+			    + "(:startweek < r.beginWeek AND :weekcount + :startweek > r.beginWeek)"
 			    + "	OR "
-			    + "(:startweek >= r.beginWeek AND r.beginWeek + r.weekCount >= :startweek)"
+			    + "(:startweek >= r.beginWeek AND r.beginWeek + r.weekCount > :startweek)"
 			    + " OR "
 			    + "(:startweek = r.beginWeek))")
 			    .setParameter("id", bungalowId)
