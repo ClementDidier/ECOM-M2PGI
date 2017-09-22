@@ -24,7 +24,7 @@ export class CartService {
     }
 
 public emptyCart() : Observable<CartValidateResponse>{
-  return this.http.post(`${env.appUrl}/cart`,"requestid : 2")
+  return this.http.post(`${env.appUrl}/cart`,`{requestid : "2"}`)
     .map(res => {
       const body: any = res.json();
       return { err: null, state: body};
@@ -36,7 +36,7 @@ public emptyCart() : Observable<CartValidateResponse>{
     ;
 }
 public validateCart() : Observable<CartValidateResponse>{
-  return this.http.post(`${env.appUrl}/cart`,"requestid : 3")
+  return this.http.post(`${env.appUrl}/cart`,`{requestid : "3"}`)
     .map(res => {
       const body: any = res.json();
       return { err: null, state: body};

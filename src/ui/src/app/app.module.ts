@@ -14,13 +14,18 @@ import { FormsModule } from '@angular/forms';
 import { CartItemComponent } from './component/cart-item/cart-item.component';
 import { CartComponent } from './component/cart/cart.component';
 import { ListComponent } from './component/list/list.component';
+import { PrebookComponent } from './component/prebook/prebook.component';
+import { BookComponent } from './component/book/book.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const appRoutes: Routes = [
   {path : 'list', component: ListComponent},
   {path : 'bungalowlist/:bungalows', component: BungalowListComponent},
   {path : 'search', component: BungalowSearchComponent},
   {path : 'signin', component: SigninComponent},
-  {path : 'cart', component: CartComponent}
+  {path : 'cart', component: CartComponent},
+  {path : 'prebook/:cartitems', component: PrebookComponent},
+  {path : 'book/:cartitems', component: BookComponent}
 
 ]
 
@@ -33,7 +38,9 @@ const appRoutes: Routes = [
     SigninComponent,
     CartItemComponent,
     CartComponent,
-    ListComponent
+    ListComponent,
+    PrebookComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +48,9 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [BungalowService, UserService, CartService],
+  providers: [BungalowService, UserService, CartService,{provide: LocationStrategy, useClass: HashLocationStrategy}
+],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

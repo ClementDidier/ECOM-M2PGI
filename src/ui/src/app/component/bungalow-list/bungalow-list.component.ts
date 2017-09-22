@@ -14,7 +14,6 @@ export class BungalowListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.activatedRoute.params);
     this.activatedRoute.params.subscribe((params : Params) =>
     {
         this.bungalows = JSON.parse(params['bungalows']);
