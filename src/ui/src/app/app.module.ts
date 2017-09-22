@@ -13,13 +13,17 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { CartItemComponent } from './component/cart-item/cart-item.component';
 import { CartComponent } from './component/cart/cart.component';
+import { PrebookComponent } from './component/prebook/prebook.component';
+import { BookComponent } from './component/book/book.component';
 
 const appRoutes: Routes = [
   {path : 'list', component: BungalowListComponent},
   {path : 'list/:bungalows', component: BungalowListComponent},
   {path : 'search', component: BungalowSearchComponent},
   {path : 'signin', component: SigninComponent},
-  {path : 'cart', component: CartComponent}
+  {path : 'cart', component: CartComponent},
+  {path : 'prebook/:cartitems', component: PrebookComponent},
+  {path : 'book/:cartitems', component: BookComponent}
 
 ]
 
@@ -31,7 +35,9 @@ const appRoutes: Routes = [
     BungalowListComponent,
     SigninComponent,
     CartItemComponent,
-    CartComponent
+    CartComponent,
+    PrebookComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
