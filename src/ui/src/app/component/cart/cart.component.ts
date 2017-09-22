@@ -45,17 +45,17 @@ export class CartComponent implements OnInit {
   emptyCart(){
     this.cartService.emptyCart().subscribe(validRes =>
       {
-        if(validRes.state== 1){
+        if(validRes.state["state"]== 1){
           console.log("la vie est belle")
           this.router.navigate(['/cart']);
 
         }
-        else if(validRes.state==0){
+        else if(validRes.state["state"]==0){
           console.log("la vie est pas belle")
 
         }
         else{
-           console.log("Err : Ca n'est pas censé arriver");
+           console.log("Err : Ca n'est pas censé arriver CRISS : " + JSON.stringify(validRes.state));
 
         }
 
