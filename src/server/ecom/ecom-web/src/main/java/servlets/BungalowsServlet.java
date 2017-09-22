@@ -53,7 +53,7 @@ public class BungalowsServlet extends HttpServlet
 	{	
 		// Usage du langage JPQL pour la projection contre les injections
 		
-		/* REQUEST GET [id] */
+		/* REQUEST GET [id] 
 		Integer id = ParameterConverter.getIntegerOf(request.getParameter("id"));
 		if(id != null) 
 		{
@@ -62,8 +62,8 @@ public class BungalowsServlet extends HttpServlet
 				response.getWriter().append(bungalow.toJson());
 			return;
 		}
-		
-		/* REQUEST GET [
+		*/
+	/* REQUEST GET [
   minbedcount: number;
   islandid:number;
   minprice:number;
@@ -72,6 +72,7 @@ public class BungalowsServlet extends HttpServlet
   endweek:number;
   ]
    */
+		
 		Integer minbedcount = ParameterConverter.getIntegerOf(request.getParameter("minbedcount"));
 		Integer islandid = ParameterConverter.getIntegerOf(request.getParameter("islandid"));
 		Integer minprice = ParameterConverter.getIntegerOf(request.getParameter("minprice"));

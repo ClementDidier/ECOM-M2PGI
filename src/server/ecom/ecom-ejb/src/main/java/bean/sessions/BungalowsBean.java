@@ -21,7 +21,6 @@ public class BungalowsBean implements IBungalowsBean {
 	@PersistenceContext(unitName="primary")
     private EntityManager manager;
 	
-	
     public BungalowsBean() {
         // TODO Auto-generated constructor stub
     }
@@ -69,14 +68,20 @@ public class BungalowsBean implements IBungalowsBean {
 		@SuppressWarnings("unchecked")
 		Collection<Bungalow> resultList = (Collection<Bungalow>) manager.createQuery(
 			    " FROM Bungalow b WHERE b.bedCount>=:minbedcount AND b.islandId=:islandid AND b.price <= :maxprice AND b.price>=:minprice"
+				
 			    + "		AND b.bungalowId NOT IN "
 			    + "							(SELECT l.bungalowId"
-			    + "							FORM Location l"
-			    + "							WHERE (l.semArrivee >= :startweek"
-			    + "							AND l.semArrivee<= :endweek)"
-			    + "							OR	"
-			    + "							(l.semArrivee + l.nbrSemaines>=:startweek"
-			    + "							AND l.semArrivee + l.nbrSemainres<=endweek))")
+			    + "							FROM Location l"
+			    + "							WHERE "
+			   // + "(l.semArrivee >= :startweek"
+			   // + "							AND l.semArrivee<= :endweek)"
+			   // + "							OR	"
+			   // + "							(l.semArrivee + l.nbrSemaines>=:startweek"
+			    + "							(l.semArrivee <=:startweek"
+			    + "							AND l.semArrivee + l.nbrSemaines>=:startweek) OR"
+			    + "							(l.semArrivee <=:endweek"
+			    + "							AND l.semArrivee + l.nbrSemaines>=:endweek))")
+			    //+ "OR (l.semArrivee >= :startweek AND l.semArrivee<= :endweek))")
 			    .setParameter("minbedcount", minbedcount)
 			    .setParameter("islandid", islandid)
 			    .setParameter("minprice", minprice)
