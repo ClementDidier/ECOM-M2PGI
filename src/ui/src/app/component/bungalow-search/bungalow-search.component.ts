@@ -25,16 +25,13 @@ export class BungalowSearchComponent implements OnInit {
 
 
   ngOnInit() {
-<<<<<<< HEAD
-    this.bungalow={'bungalowid':0,'bedcount': 0, 'islandid' : 0, 'weekprice':0};
-=======
     let thisweek = new Date();
-    let nextweek = new Date(thisweek.getDate() + 7);
-
+    let nextweek = new Date();
+    nextweek.setDate(thisweek.getDate()+7);
+    console.log(nextweek);
     //TODO get list île et peupleur la recherche
     this.bungalowsearch={'minbedcount': 0, 'islandid' : 0, 'minprice':0,
                         'maxprice':500, 'startweek':this.getWeek(thisweek), 'startyear' : thisweek.getFullYear(),'endweek':this.getWeek(nextweek), 'endyear': nextweek.getFullYear()};
->>>>>>> espace-recherche
   }
 
   search(){

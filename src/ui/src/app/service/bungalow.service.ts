@@ -35,20 +35,12 @@ export class BungalowService {
         })
         ;
     }
-<<<<<<< HEAD
-    public getBungalows(bungalow: Bungalow) : Observable<BungalowsResponse> {
-      return this.http.get(`${env.appUrl}/bungalows?bedcount=${bungalow.bedcount}&islandid=${bungalow.islandid}&maxprice=${bungalow.weekprice}`)
-        .map(res => {
-          const body: any = res.json();
-          return { err: null, bungalows: body};
-=======
     public getBungalows(bungalowsearch: BungalowSearch) : Observable<BungalowsSearchResponse> {
       return this.http.get(`${env.appUrl}/bungalows?minbedcount=${bungalowsearch.minbedcount}&islandid=${bungalowsearch.islandid}&minprice=${bungalowsearch.minprice}&maxprice=${bungalowsearch.maxprice}&startweek=${bungalowsearch.startyear}${bungalowsearch.startweek}&endweek=${bungalowsearch.endyear}${bungalowsearch.endweek}`)
         .map(res => {
           const body: any = res.json();
           return { err: null, bungalows:JSON.stringify(body,null,1)};
           //return { err: null, bungalows: []};
->>>>>>> espace-recherche
         })
         .catch(err => {
           console.log('Server error: ' + JSON.stringify(err, null, 2));
