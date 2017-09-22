@@ -24,7 +24,7 @@ public class Bungalow implements IJsonSerializable, Serializable
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="BungalowId")
 	private Integer id;
-	
+
 	@Column(name="BedCount")
 	private Integer bedCount;
 	
@@ -51,7 +51,7 @@ public class Bungalow implements IJsonSerializable, Serializable
 	
 	public Integer getId()
 	{
-		return this.id;
+		return id;
 	}
 
 	public Integer getBedCount() 
