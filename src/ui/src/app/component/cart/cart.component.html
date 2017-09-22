@@ -35,10 +35,14 @@
         </tr>
       </tbody>
 </table>
- <input (click)="validate()" type="button" value="Commander" />
- <input (click)="emptyCart()" type="button" value="Vider le panier" />
-
+ <button type="button" class="btn btn-info btn-lg" (click)="validate()">Commander</button>
+ <button type="button" class="btn btn-info btn-lg" (click)="emptyCart()">Vider le panier</button>
 </ng-template>
+
 <ng-template #empty_state>
+<p>
 Votre panier est vide !
+Remplissez le et revenez ici pour commander vos vacances !
+</p>
+<button type="button" class="btn btn-info btn-lg" routerLink="/">Retour à l'accueil</button>
 </ng-template>
