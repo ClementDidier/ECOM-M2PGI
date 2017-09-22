@@ -47,10 +47,20 @@ export class CartComponent implements OnInit {
       {
         if(validRes.state["state"]== 1){
           console.log("la vie est belle")
-          this.ngOnInit();
-          this.router.navigate(['/cart']);
+          this.cartService.getCart().subscribe(cartRes => {
+                if(!cartRes.err){
+                  this.cartItems = cartRes.cartitems;
+                  this.totalprice = 0;
+                  for(let cartItem of this.cartItems){
+                    this.totalprice += cartItem.bungalow.weekprice * cartItem.duration;
+                  }
+            }
+            else console.log("Err : " + cartRes.err);
+          });
+          location.reload();
+          //this.router.reload();
 
-        }
+       }
         else if(validRes.state["state"]==0){
           console.log("la vie est pas belle")
 
