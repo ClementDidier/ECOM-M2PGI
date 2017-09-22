@@ -18,8 +18,8 @@ public class Bungalow implements IJsonSerializable, Serializable
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
-	private Integer id;
+	@Column(name="bungalowId")
+	private Integer bungalowId;
 	
 	@Column(name="bedCount")
 	private Integer bedCount;
@@ -45,7 +45,7 @@ public class Bungalow implements IJsonSerializable, Serializable
 	
 	public Integer getId()
 	{
-		return this.id;
+		return this.bungalowId;
 	}
 
 	public Integer getBedCount() 
@@ -67,7 +67,7 @@ public class Bungalow implements IJsonSerializable, Serializable
 	public String toJson() 
 	{
 		JSONObject obj = new JSONObject();
-		obj.put("id", this.getId());
+		obj.put("bungalowId", this.getId());
 		obj.put("bedcount", this.getBedCount());
 		obj.put("price", this.getPrice());
 		obj.put("islandid", this.getIslandId());
