@@ -47,6 +47,7 @@ export class CartComponent implements OnInit {
       {
         if(validRes.state["state"]== 1){
           console.log("la vie est belle")
+          this.ngOnInit();
           this.router.navigate(['/cart']);
 
         }
