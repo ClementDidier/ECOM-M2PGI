@@ -9,8 +9,10 @@ import { BungalowListComponent } from './component/bungalow-list/bungalow-list.c
 import {RouterModule, Routes} from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
+  {path : '', component: LoginComponent},
   {path : 'list', component: BungalowListComponent},
   {path : 'list/:bungalows', component: BungalowListComponent},
   {path : 'search', component: BungalowSearchComponent}
@@ -20,7 +22,8 @@ const appRoutes: Routes = [
     AppComponent,
     BungalowComponent,
     BungalowSearchComponent,
-    BungalowListComponent
+    BungalowListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@
   "/":{
     "target":"http://localhost:8080",
     "secure":false,
-    "pathRewrite":{"^/rest": "/rest"},
+    "pathRewrite":{"^/ecom-web": "/ecom-web"},
     "changeOrigin":true,
     "logLevel":"debug"
   }

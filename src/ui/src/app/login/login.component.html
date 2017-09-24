@@ -1,0 +1,23 @@
+<div *ngIf="login && login.length > 0;then content else empty_state">here is ignored</div>
+
+
+<ng-template #content>
+Hello !
+</ng-template>
+<ng-template #empty_state>
+
+<form (submit)="loginUser($event)">
+  <div class="input">
+    <label>Login</label>
+    <input type="text">
+  </div>
+  <div class="input">
+    <label>Password</label>
+    <input type="password">
+  </div>
+  <div class="input">
+    <input type="submit" value="login">
+  </div>
+</form>
+
+</ng-template>
