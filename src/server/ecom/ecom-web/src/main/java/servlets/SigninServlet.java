@@ -43,14 +43,41 @@ public class SigninServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		String errorMessage = null;
 		String mail = request.getParameter("mail");
 		if(mail != null)
 		{
-			// TODO : Not tested
 			User user = this.userBean.getUser(mail);
-			System.out.println(user.toJson());
+			if(user != null)
+			{
+				errorMessage = "Un compte existe déjà avec cette adresse email";
+			}
+			else
+			{
+				// TODO : VALIDER LES PARAMETRES + SECURITE
+				String firstname = request.getParameter("firstname");
+				String lastname = request.getParameter("lastname");
+				String address = request.getParameter("address");
+				String postal = request.getParameter("postal");
+				String phone = request.getParameter("phone");
+				String password = request.getParameter("password");
+				User u = new User(firstname, lastname, address, postal, mail, phone, password);
+				this.userBean.save(u);
+			}
 		}
-		else System.out.println("MAIL NULL");
+		else
+		{
+			errorMessage = "Un paramètre attendu n'a pas été définit";
+		}
+		
+		if(errorMessage != null)
+		{
+			response.getWriter().append("{ 'state' : '0', 'msg' : 'Un compte existe déjà avec cette adresse email' }");
+		}
+		else
+		{
+			response.getWriter().append("{ 'state' : '1' }");
+		}
 	}
 
 }

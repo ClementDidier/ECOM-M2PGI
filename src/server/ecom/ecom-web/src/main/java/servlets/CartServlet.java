@@ -47,7 +47,6 @@ public class CartServlet extends HttpServlet {
     private ICartBean getCartBean(HttpServletRequest request)
     {
     	ICartBean cartBean = (ICartBean) request.getSession().getAttribute(CART_SESSION_KEY);
-    	System.out.println(request.getSession().getId());
 		if(cartBean == null)
 		{
 			try 

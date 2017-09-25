@@ -30,6 +30,9 @@ public class User implements Serializable, IJsonSerializable {
 	@Column(name="address")
 	private String address;
 	
+	@Column(name="postal")
+	private String postal;
+	
 	@Column(name="mail")
 	private String mail;
 	
@@ -38,9 +41,24 @@ public class User implements Serializable, IJsonSerializable {
 	
 	@Column(name="isAdmin")
 	private boolean isAdmin;
+
+	@Column(name="password")
+	private String password;
 	
 	public User() {
 		super();
+	}
+
+	public User(String firstname, String lastname, String address, String postal, String mail, String phone, String password) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.address = address;
+		this.postal = postal;
+		this.password = password;
+		this.mail = mail;
+		this.phone = phone;
+		this.isAdmin = false;
 	}
 
 	public Integer getId() {

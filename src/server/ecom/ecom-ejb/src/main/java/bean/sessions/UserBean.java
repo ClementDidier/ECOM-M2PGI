@@ -60,4 +60,9 @@ public class UserBean implements IUserBean
 			return users.get(0);
 	}
 
+	@Override
+	public void save(User u) 
+	{
+		this.manager.persist(u);
+	}
 }
