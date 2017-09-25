@@ -28,7 +28,7 @@ public class ConnexionBean implements IConnexionBean {
     }
 
 	@Override
-	public List<Connexion> loginUser(String login, String password) {
+	public Boolean loginUser(String login, String password) {
 		// TODO Auto-generated method stub
 		@SuppressWarnings("unchecked")
 		List<Connexion> connexion = (List<Connexion>) manager.createQuery(
@@ -39,9 +39,9 @@ public class ConnexionBean implements IConnexionBean {
 			    .getResultList();
 		
 		if(!connexion.isEmpty())
-			return connexion;
+			return true;
 		else 
-			return null;
+			return false;
 	}
 
 	@Override

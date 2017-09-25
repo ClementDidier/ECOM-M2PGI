@@ -8,7 +8,7 @@ import jobs.Connexion;
 
 @Remote
 public interface IConnexionBean {
-	public List<Connexion> loginUser(String login, String password);
+	public Boolean loginUser(String login, String password);
 	public Connexion getUser(Integer id);
 
 	
