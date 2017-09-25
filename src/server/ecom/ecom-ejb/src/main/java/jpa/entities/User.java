@@ -1,11 +1,14 @@
 package jpa.entities;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
+
 import javax.persistence.*;
 
 import org.json.JSONObject;
 
 import jobs.IJsonSerializable;
+import utils.SecurityHelper;
 
 /**
  * Entity implementation class for Entity: User
@@ -43,21 +46,25 @@ public class User implements Serializable, IJsonSerializable {
 	private boolean isAdmin;
 
 	@Column(name="password")
-	private String password;
+	private String saltHashPassword;
+	
+	@Column(name="salt")
+	private String salt;
 	
 	public User() {
 		super();
 	}
 
-	public User(String firstname, String lastname, String address, String postal, String mail, String phone, String password) {
+	public User(String firstname, String lastname, String address, String postal, String mail, String phone, String password) throws NoSuchAlgorithmException {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.address = address;
 		this.postal = postal;
-		this.password = password;
 		this.mail = mail;
 		this.phone = phone;
+		this.salt = this.firstname + this.lastname + this.postal;
+		this.saltHashPassword = SecurityHelper.getMD5Hash(password + this.salt);
 		this.isAdmin = false;
 	}
 

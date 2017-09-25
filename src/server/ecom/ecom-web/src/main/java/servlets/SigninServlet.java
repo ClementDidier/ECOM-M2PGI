@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -8,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import bean.sessions.UserBean;
 import jpa.entities.User;
+import utils.Converter;
 
 /**
  * Servlet implementation class UserServlet
@@ -44,7 +49,9 @@ public class SigninServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		String errorMessage = null;
-		String mail = request.getParameter("mail");
+		String requestBody = request.getReader().lines().collect(Collectors.joining());
+		JSONObject obj = new JSONObject(requestBody);
+		String mail = (String) obj.get("mail");
 		if(mail != null)
 		{
 			User user = this.userBean.getUser(mail);
@@ -54,15 +61,21 @@ public class SigninServlet extends HttpServlet {
 			}
 			else
 			{
-				// TODO : VALIDER LES PARAMETRES + SECURITE
-				String firstname = request.getParameter("firstname");
-				String lastname = request.getParameter("lastname");
-				String address = request.getParameter("address");
-				String postal = request.getParameter("postal");
-				String phone = request.getParameter("phone");
-				String password = request.getParameter("password");
-				User u = new User(firstname, lastname, address, postal, mail, phone, password);
-				this.userBean.save(u);
+				// TODO : VALIDER LES PARAMETRES + Cryptage
+				
+				String firstname = (String) obj.get("firstname");
+				String lastname = (String) obj.get("lastname");
+				String address = (String) obj.get("address");
+				String postal = (String) obj.get("postal");
+				String phone = (String) obj.get("phone");
+				String hashedPassword = (String) obj.get("password");
+				
+				try {
+					this.userBean.save(new User(firstname, lastname, address, postal, mail, phone, hashedPassword));
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+					errorMessage = "Erreur serveur";
+				}
 			}
 		}
 		else
@@ -72,7 +85,7 @@ public class SigninServlet extends HttpServlet {
 		
 		if(errorMessage != null)
 		{
-			response.getWriter().append("{ 'state' : '0', 'msg' : 'Un compte existe déjà avec cette adresse email' }");
+			response.getWriter().append("{ 'state' : '0', 'msg' : '" + errorMessage + "' }");
 		}
 		else
 		{
