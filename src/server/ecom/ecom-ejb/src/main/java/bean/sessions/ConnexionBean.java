@@ -32,8 +32,8 @@ public class ConnexionBean implements IConnexionBean {
 		// TODO Auto-generated method stub
 		@SuppressWarnings("unchecked")
 		List<Connexion> connexion = (List<Connexion>) manager.createQuery(
-			    " FROM Connexion b WHERE b.login=:login and b.password=:password")
-			    .setParameter("login", login)
+			    " FROM users b WHERE b.mail=:login and b.password=:password")
+			    .setParameter("mail", login)
 			    .setParameter("password", password)
 			    .setMaxResults(1)
 			    .getResultList();
@@ -50,8 +50,8 @@ public class ConnexionBean implements IConnexionBean {
 		
 		@SuppressWarnings("unchecked")
 		List<Connexion> bungalows = (List<Connexion>) manager.createQuery(
-			    " FROM Connexion b WHERE b.userId=:id")
-			    .setParameter("userId", id)
+			    " FROM CONNEXION b WHERE b.UserId=:id")
+			    .setParameter("UserId", id)
 			    .setMaxResults(1)
 			    .getResultList();
 		

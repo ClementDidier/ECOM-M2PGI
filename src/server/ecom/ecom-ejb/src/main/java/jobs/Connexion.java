@@ -18,14 +18,14 @@ public class Connexion implements IJsonSerializable, Serializable
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="userId")
-	private Integer userId;
+	@Column(name="UserId")
+	private Integer UserId;
 	
-	@Column(name="login")
-	private String login;
+	@Column(name="Address")
+	private String Address;
 	
-	@Column(name="password")
-	private String password;
+	@Column(name="Password")
+	private String Password;
 
 	
 	public Connexion()
@@ -36,33 +36,37 @@ public class Connexion implements IJsonSerializable, Serializable
 	public Connexion(String login, String password)
 	{
 		super();
-		this.login = login;
-		this.password = password;
+		this.Address = login;
+		this.Password = password;
 	}
 	
 	public Integer getId()
 	{
-		return this.userId;
+		return this.UserId;
 	}
 
 	public String getLogin() 
 	{
-		return login;
+		return Address;
 	}
 
 	public String getPassword() 
 	{
-		return password;
+		return Password;
 	}
 
 	@Override
 	public String toJson() 
 	{
 		JSONObject obj = new JSONObject();
-		obj.put("userId", this.getId());
-		obj.put("login", this.getLogin());
-		obj.put("password", this.getPassword());
+		obj.put("UserId", this.getId());
+		obj.put("Address", this.getLogin());
+		obj.put("Password", this.getPassword());
 		
 		return obj.toString();
 	}
 }
+
+	
+
+
