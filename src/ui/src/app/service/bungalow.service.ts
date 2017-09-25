@@ -11,7 +11,7 @@ export class BungalowService {
   constructor(private http: Http) { }
 
   public getAllBungalows(): Observable<BungalowsResponse> {
-    return this.http.get(`${env.appUrl}/bungalows`)
+    return this.http.get(`${env.appUrl}/bungalows?requestid='1'`)
       .map(res => {
         const body: any = res.json();
         return { err: null, bungalows: body};
@@ -24,7 +24,7 @@ export class BungalowService {
     }
 
     public getBungalow(bungalowId: string): Observable<BungalowResponse> {
-      return this.http.get(`${env.appUrl}/bungalows/${bungalowId}`)
+      return this.http.get(`${env.appUrl}/bungalows?requestid='2'&id='${bungalowId}''`)
         .map(res => {
           const body: any = res.json();
           return { err: null, bungalow: body};
@@ -36,7 +36,7 @@ export class BungalowService {
         ;
     }
     public getBungalows(bungalowsearch: BungalowSearch) : Observable<BungalowsSearchResponse> {
-      return this.http.get(`${env.appUrl}/bungalows?minbedcount=${bungalowsearch.minbedcount}&islandid=${bungalowsearch.islandid}&minprice=${bungalowsearch.minprice}&maxprice=${bungalowsearch.maxprice}&startweek=${bungalowsearch.startyear}${bungalowsearch.startweek}&endweek=${bungalowsearch.endyear}${bungalowsearch.endweek}`)
+      return this.http.get(`${env.appUrl}/bungalows?requestid='3'&minbedcount=${bungalowsearch.minbedcount}&islandid=${bungalowsearch.islandid}&minprice=${bungalowsearch.minprice}&maxprice=${bungalowsearch.maxprice}&startweek=${bungalowsearch.startyear}${bungalowsearch.startweek}&endweek=${bungalowsearch.endyear}${bungalowsearch.endweek}`)
         .map(res => {
           const body: any = res.json();
           return { err: null, bungalows:JSON.stringify(body,null,1)};
