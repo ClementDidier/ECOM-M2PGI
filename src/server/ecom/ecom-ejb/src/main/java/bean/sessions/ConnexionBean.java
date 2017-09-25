@@ -1,5 +1,5 @@
 package bean.sessions;
-
+import  java.security.MessageDigest;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -8,9 +8,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.jboss.sasl.util.Charsets;
+
+import com.google.common.hash.Hashing;
+
 import jobs.Bungalow;
 import jobs.Connexion;
-
 /**
  * Session Bean implementation class Connexion
  */
@@ -27,14 +30,31 @@ public class ConnexionBean implements IConnexionBean {
         // TODO Auto-generated constructor stub
     }
 
+    public String getHash(String txt, String hashType) {
+        try {
+                    java.security.MessageDigest md = java.security.MessageDigest.getInstance(hashType);
+                    byte[] array = md.digest(txt.getBytes());
+                    StringBuffer sb = new StringBuffer();
+                    for (int i = 0; i < array.length; ++i) {
+                        sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+                 }
+                    return sb.toString();
+            } catch (java.security.NoSuchAlgorithmException e) {
+                //error action
+            }
+            return null;
+    }
+    
 	@Override
 	public Boolean loginUser(String login, String password) {
+		
 		// TODO Auto-generated method stub
+		String hashPassword = getHash(password, "MD5");
 		@SuppressWarnings("unchecked")
 		List<Connexion> connexion = (List<Connexion>) manager.createQuery(
 			    " FROM users b WHERE b.mail=:login and b.password=:password")
 			    .setParameter("mail", login)
-			    .setParameter("password", password)
+			    .setParameter("password", hashPassword)
 			    .setMaxResults(1)
 			    .getResultList();
 		
