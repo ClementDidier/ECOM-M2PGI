@@ -48,7 +48,7 @@ public class BungalowsBean implements IBungalowsBean {
 		// TODO : Créer des requêtes préalablement (requêtes précompilées)
 		@SuppressWarnings("unchecked")
 		List<Bungalow> bungalows = (List<Bungalow>) manager.createQuery(
-			    " FROM Bungalow b WHERE b.id=:id")
+			    " FROM BUNGALOWS b WHERE b.BungalowId=:id")
 			    .setParameter("id", id)
 			    .setMaxResults(1)
 			    .getResultList();
@@ -67,20 +67,20 @@ public class BungalowsBean implements IBungalowsBean {
 	{
 		@SuppressWarnings("unchecked")
 		Collection<Bungalow> resultList = (Collection<Bungalow>) manager.createQuery(
-			    " FROM Bungalow b WHERE b.bedCount>=:minbedcount AND b.islandId=:islandid AND b.price <= :maxprice AND b.price>=:minprice"
+			    " FROM BUNGALOWS b WHERE b.BedCount>=:minbedcount AND b.WeekPrice <= :maxprice AND b.WeekPrice>=:minprice"
 				
-			    + "		AND b.bungalowId NOT IN "
-			    + "							(SELECT l.bungalowId"
-			    + "							FROM Location l"
+			    + "		AND b.BungalowId NOT IN "
+			    + "							(SELECT l.BungalowId"
+			    + "							FROM RENTS l"
 			    + "							WHERE "
 			   // + "(l.semArrivee >= :startweek"
 			   // + "							AND l.semArrivee<= :endweek)"
 			   // + "							OR	"
 			   // + "							(l.semArrivee + l.nbrSemaines>=:startweek"
-			    + "							(l.semArrivee <=:startweek"
-			    + "							AND l.semArrivee + l.nbrSemaines>=:startweek) OR"
-			    + "							(l.semArrivee <=:endweek"
-			    + "							AND l.semArrivee + l.nbrSemaines>=:endweek))")
+			    + "							(l.BeginWeek <=:startweek"
+			    + "							AND l.BeginWeek + l.WeekCount>=:startweek) OR"
+			    + "							(l.BeginWeek <=:endweek"
+			    + "							AND l.BeginWeek + l.WeekCount>=:endweek))")
 			    //+ "OR (l.semArrivee >= :startweek AND l.semArrivee<= :endweek))")
 			    .setParameter("minbedcount", minbedcount)
 			    .setParameter("islandid", islandid)

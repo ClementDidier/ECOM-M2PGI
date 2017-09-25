@@ -11,28 +11,31 @@ import javax.persistence.Table;
 
 import org.json.JSONObject;
 
-@Entity @Table(name="locations")
+@Entity @Table(name="RENTS")
 public class Location implements IJsonSerializable, Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="idLocation")
-	private Integer idLocation;
+	@Column(name="RentId")
+	private Integer RentId;
 	//semArrivee + l.nbrSemaines
 	//bungalowId
-	@Column(name="bungalowId")
-	private Integer bungalowId;
+	@Column(name="BungalowId")
+	private Integer BungalowId;
 
-	@Column(name="semArrivee")
-	private Integer semArrivee;
+	@Column(name="BeginWeek")
+	private Integer BeginWeek;
 	
-	@Column(name="nbrSemaines")
-	private Integer nbrSemaines;
+	@Column(name="WeekCount")
+	private Integer WeekCount;
 	
-	@Column(name="Avis")
-	private String Avis;
+	@Column(name="Comment")
+	private String Comment;
+	
+	@Column(name="Note")
+	private String Note;
 	
 	public Location()
 	{
@@ -43,29 +46,29 @@ public class Location implements IJsonSerializable, Serializable
 	public Location(int bungalowId, int semArrivee, Integer nbrSemaines)
 	{
 		super();
-		this.bungalowId = bungalowId;
-		this.nbrSemaines = nbrSemaines;
-		this.semArrivee = semArrivee;
+		this.BungalowId = bungalowId;
+		this.WeekCount = nbrSemaines;
+		this.BeginWeek = semArrivee;
 	}
 	
 	public Integer getId()
 	{
-		return this.idLocation;
+		return this.RentId;
 	}
 
 	public Integer getBungalowId()
 	{
-		return this.bungalowId;
+		return this.BungalowId;
 	}
 	
 	public Integer getSemArrivee() 
 	{
-		return semArrivee;
+		return BeginWeek;
 	}
 
 	public Integer getNbrSemaines() 
 	{
-		return nbrSemaines;
+		return WeekCount;
 	}
 
 
@@ -74,10 +77,10 @@ public class Location implements IJsonSerializable, Serializable
 	public String toJson() 
 	{
 		JSONObject obj = new JSONObject();
-		obj.put("idLocation", this.getId());
+		obj.put("RentId", this.getId());
 		obj.put("bungalowId", this.getBungalowId());
-		obj.put("semArrivee", this.getSemArrivee());
-		obj.put("semArrivee", this.getNbrSemaines());
+		obj.put("BeginWeek", this.getSemArrivee());
+		obj.put("WeekCount", this.getNbrSemaines());
 		
 		return obj.toString();
 	}

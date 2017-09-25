@@ -11,24 +11,21 @@ import javax.persistence.Table;
 
 import org.json.JSONObject;
 
-@Entity @Table(name="bungalows")
+@Entity @Table(name="BUNGALOWS")
 public class Bungalow implements IJsonSerializable, Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="bungalowId")
-	private Integer bungalowId;
+	@Column(name="BungalowId")
+	private Integer BungalowId;
 	
-	@Column(name="bedCount")
-	private Integer bedCount;
+	@Column(name="BedCount")
+	private Integer BedCount;
 	
-	@Column(name="price")
-	private Integer price;
-	
-	@Column(name="islandId")
-	private Integer islandId;
+	@Column(name="WeekPrice")
+	private Integer WeekPrice;
 	
 	public Bungalow()
 	{
@@ -38,39 +35,33 @@ public class Bungalow implements IJsonSerializable, Serializable
 	public Bungalow(int bedCount, int price, Integer islandId)
 	{
 		super();
-		this.bedCount = bedCount;
-		this.price = price;
-		this.islandId = islandId;
+		this.BedCount = bedCount;
+		this.WeekPrice = price;
 	}
 	
 	public Integer getId()
 	{
-		return this.bungalowId;
+		return this.BungalowId;
 	}
 
 	public Integer getBedCount() 
 	{
-		return bedCount;
+		return BedCount;
 	}
 
 	public Integer getPrice() 
 	{
-		return price;
+		return WeekPrice;
 	}
 
-	public Integer getIslandId() 
-	{
-		return islandId;
-	}
 
 	@Override
 	public String toJson() 
 	{
 		JSONObject obj = new JSONObject();
-		obj.put("bungalowId", this.getId());
-		obj.put("bedcount", this.getBedCount());
-		obj.put("price", this.getPrice());
-		obj.put("islandid", this.getIslandId());
+		obj.put("BungalowId", this.getId());
+		obj.put("BedCount", this.getBedCount());
+		obj.put("WeekPrice", this.getPrice());
 		
 		return obj.toString();
 	}
