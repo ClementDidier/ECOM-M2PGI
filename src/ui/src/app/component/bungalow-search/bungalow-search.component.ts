@@ -11,6 +11,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
   styleUrls: ['./bungalow-search.component.css']
 })
 export class BungalowSearchComponent implements OnInit {
+  public location = '/search';
   bungalowsearch: BungalowSearch;
   constructor(private bungalowService : BungalowService,
     private router: Router,
@@ -37,7 +38,7 @@ export class BungalowSearchComponent implements OnInit {
   search(){
   this.bungalowService.getBungalows(this.bungalowsearch).subscribe(bungalowRes => {
         if(!bungalowRes.err){
-            this.router.navigate(['/list', JSON.stringify(bungalowRes.bungalows)]);
+            this.router.navigate(['/bungalowlist', JSON.stringify(bungalowRes.bungalows)]);
     }
     else console.log(bungalowRes.err);
   })

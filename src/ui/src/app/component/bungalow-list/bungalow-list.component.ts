@@ -8,6 +8,7 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./bungalow-list.component.css']
 })
 export class BungalowListComponent implements OnInit {
+  public location = 'bungalowlist';
 
   bungalows : Bungalow[] = [];
   constructor(private activatedRoute: ActivatedRoute) {

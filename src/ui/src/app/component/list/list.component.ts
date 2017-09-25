@@ -8,6 +8,7 @@ import { BungalowService } from './../../service/bungalow.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+  public location = '/list';
 
   constructor(private bungalowService : BungalowService,
     private router: Router,private activatedRoute: ActivatedRoute) {}

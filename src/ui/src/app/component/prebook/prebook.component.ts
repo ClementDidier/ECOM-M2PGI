@@ -8,6 +8,7 @@ import { Cart } from '../../model/cart';
   styleUrls: ['./prebook.component.css']
 })
 export class PrebookComponent implements OnInit {
+  public location = '/prebook';
 
   cart : Cart;
   constructor(private activatedRoute: ActivatedRoute,  private router: Router) {

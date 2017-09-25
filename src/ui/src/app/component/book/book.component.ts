@@ -9,6 +9,7 @@ import { BookService } from '../../service/book.service';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
+  public location = '/book';
 
   cart : Cart;
   numCarte: number;

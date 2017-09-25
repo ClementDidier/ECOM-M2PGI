@@ -7,6 +7,7 @@ import { Bungalow } from './../../model/bungalow';
   styleUrls: ['./bungalow.component.css']
 })
 export class BungalowComponent implements OnInit {
+  public location = '/bungalow';
 
   @Input() public bungalow: Bungalow;
   constructor() { }

@@ -12,6 +12,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 export class CartComponent implements OnInit {
   cartItems : CartItem[];
   totalprice : number;
+  public location = '/cart';
   constructor(private cartService : CartService, private router: Router) { }
 
   ngOnInit() {

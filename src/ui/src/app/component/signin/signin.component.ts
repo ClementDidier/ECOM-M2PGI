@@ -11,6 +11,7 @@ import { User } from '../../model/user';
 export class SigninComponent implements OnInit
 {
     user : User;
+    public location = '/signin';
 
     constructor(private userService : UserService, private router : Router) { }
 

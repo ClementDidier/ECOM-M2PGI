@@ -17,9 +17,12 @@ import { ListComponent } from './component/list/list.component';
 import { PrebookComponent } from './component/prebook/prebook.component';
 import { BookComponent } from './component/book/book.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AccueilComponent } from './component/accueil/accueil.component';
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: '/accueil', pathMatch: 'full' },
   {path : 'list', component: ListComponent},
+  {path : 'accueil', component: AccueilComponent},
   {path : 'bungalowlist/:bungalows', component: BungalowListComponent},
   {path : 'search', component: BungalowSearchComponent},
   {path : 'signin', component: SigninComponent},
@@ -40,7 +43,8 @@ const appRoutes: Routes = [
     CartComponent,
     ListComponent,
     PrebookComponent,
-    BookComponent
+    BookComponent,
+    AccueilComponent
   ],
   imports: [
     BrowserModule,
