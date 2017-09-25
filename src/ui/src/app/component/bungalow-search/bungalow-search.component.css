@@ -1,3 +1,12 @@
 .group{
   display: inline-block;
+
+}
+#searchForm{
+  margin: 0 auto;
+  float: none;
+
+}
+.btn-primary{
+  right: 0px;
 }
