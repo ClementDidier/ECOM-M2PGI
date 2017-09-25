@@ -53,10 +53,10 @@ public class ConnexionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String login = (String)request.getParameter("login");
 		String password = (String)request.getParameter("password");
-		List<Connexion> connexion = this.connexionBean.loginUser(login, password);
+		Boolean connexion = this.connexionBean.loginUser(login, password);
 		//response.getWriter().append(this.convertToJson(connexion).toString());
 
-		if(connexion != null) response.getWriter().append(" Welcome "+login+" ! ").toString();
+		if(connexion == true) response.getWriter().append(" Welcome "+login+" ! ").toString();
 		else response.getWriter().append(" Login failed ! ").toString();
 		
 	}
