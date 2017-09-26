@@ -1,0 +1,11 @@
+<tr>
+  <td>
+      <app-bungalow [bungalow]="cartItem.bungalow"></app-bungalow>
+  </td>
+  <td>
+    {{cartItem.duration}} semaine(s)
+  </td>
+  <td>
+    {{cartItem.bungalow.weekprice * cartItem.duration}}
+  </td>
+</tr>

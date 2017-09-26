@@ -1,0 +1,32 @@
+<div *ngIf="bungalows && bungalows.length > 0;then content else empty_state">here is ignored</div>
+
+<ng-template #content>
+    Liste des bungalows correspondants :
+    <ol>
+        <li *ngFor="let bungalow of bungalows">
+            <app-bungalow [bungalow]="bungalow"></app-bungalow>
+			Semaine d'arrivée:
+			<SELECT name="startweek" size="1">
+			<OPTION>1<OPTION>2<OPTION>3<OPTION>4<OPTION>5<OPTION>6<OPTION>7<OPTION>8<OPTION>9<OPTION>10
+			<OPTION>11<OPTION>12<OPTION>13<OPTION>14<OPTION>15<OPTION>16<OPTION>17<OPTION>18<OPTION>19<OPTION>20
+			<OPTION>21<OPTION>22<OPTION>23<OPTION>24<OPTION>25<OPTION>26<OPTION>27<OPTION>28<OPTION>29<OPTION>30
+			<OPTION>31<OPTION>32<OPTION>33<OPTION>34<OPTION>35<OPTION>36<OPTION>37<OPTION>38<OPTION>39<OPTION>40
+			<OPTION>41<OPTION>42<OPTION>43<OPTION>44<OPTION>45<OPTION>46<OPTION>47<OPTION>48<OPTION>49<OPTION>50
+			<OPTION>51<OPTION>52
+			</SELECT>
+			Semaine de départ:
+			<SELECT name="endweek" size="1">
+			<OPTION>1<OPTION>2<OPTION>3<OPTION>4<OPTION>5<OPTION>6<OPTION>7<OPTION>8<OPTION>9<OPTION>10
+			<OPTION>11<OPTION>12<OPTION>13<OPTION>14<OPTION>15<OPTION>16<OPTION>17<OPTION>18<OPTION>19<OPTION>20
+			<OPTION>21<OPTION>22<OPTION>23<OPTION>24<OPTION>25<OPTION>26<OPTION>27<OPTION>28<OPTION>29<OPTION>30
+			<OPTION>31<OPTION>32<OPTION>33<OPTION>34<OPTION>35<OPTION>36<OPTION>37<OPTION>38<OPTION>39<OPTION>40
+			<OPTION>41<OPTION>42<OPTION>43<OPTION>44<OPTION>45<OPTION>46<OPTION>47<OPTION>48<OPTION>49<OPTION>50
+			<OPTION>51<OPTION>52
+			</SELECT>
+			<input type="button" (click)="sendCart(bungalowid, startweek, endweek)" value="Ajouter au panier">
+        </li>
+    </ol>
+</ng-template>
+<ng-template #empty_state>
+    Aucun bungalow ne correspond aux critères indiqués.
+</ng-template>

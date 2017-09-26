@@ -1,0 +1,48 @@
+<div *ngIf="cart && cart.cartitems.length > 0;then content else empty_state">here is ignored</div>
+
+<ng-template #content>
+  Paiement pour :
+  <table class="table table-striped .table-hover">
+        <thead class="thead-inverse">
+        <tr>
+          <td>Bungalow</td>
+          <td>Durée</td>
+          <td>Prix</td>
+        </tr>
+      </thead>
+      <tbody *ngFor="let cartItem of cart.cartitems">
+            <tr>
+              <td>
+                  <app-bungalow [bungalow]="cartItem.bungalow"></app-bungalow>
+              </td>
+              <td>
+                {{cartItem.duration}} semaine(s)
+              </td>
+              <td>
+                {{cartItem.bungalow.weekprice * cartItem.duration}}
+              </td>
+            </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+            Total : {{cart.totalprice}}
+          </td>
+        </tr>
+      </tbody>
+</table>
+<form id="paymentForm" (ngSubmit)="payer()">
+  <div class="group">
+      <label for="numcb" class="col-form-label">Numéro de carte</label>
+      <input type="text" class="form-control" id="numcb" placeholder="1234" [(ngModel)]="numCarte" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Payer</button>
+</form>
+</ng-template>
+<ng-template #empty_state>
+Jamais censé arriver
+</ng-template>
