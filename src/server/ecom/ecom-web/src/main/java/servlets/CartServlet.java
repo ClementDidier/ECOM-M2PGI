@@ -120,17 +120,17 @@ public class CartServlet extends HttpServlet {
 		Integer duration = Converter.getIntegerOf((String) reqObject.get("duration"));
 		
 		if(startweek > endweek)
-			throw new Exception("Impossible de réaliser la requête, la date de début de location est supérieure à la date de fin");
+			throw new Exception("Impossible de realiser la requête, la date de debut de location est superieure a la date de fin");
 		
 		if(bungalowId == null)
-			throw new Exception("Impossible d'interprêter l'identifiant donné, convertion impossible");
+			throw new Exception("Impossible d'interpreter l'identifiant donne, convertion impossible");
 		
 		if(this.bungalowBean.getBungalows(bungalowId) == null)
 			throw new Exception("Le bungalow n'existe pas");
 			
 		Bungalow bungalow = this.bungalowBean.getBungalowNotRented(bungalowId, startweek, endweek);
 		if(bungalow == null)
-			throw new Exception("Le bungalow n'est pas disponible pour la période demandée");
+			throw new Exception("Le bungalow n'est pas disponible pour la periode demandee");
 		
 		ICartBean cartBean = this.getCartBean(request);
 		cartBean.addItem(new CartItem(bungalow, startweek, endweek, duration));
@@ -153,7 +153,8 @@ public class CartServlet extends HttpServlet {
 		List<CartItem> validatedCarts = cartBean.validate(request.getSession().getId()); // Synchronized
 		
 		JSONArray resultArray = new JSONArray();
-		resultArray.put(validatedCarts);
+		for(CartItem item : validatedCarts)
+			resultArray.put(item);
 		
 		response.getWriter().append("{ \"state\" : \"1\", \"cartitems\" : " + resultArray.toString() + " }");
 	}

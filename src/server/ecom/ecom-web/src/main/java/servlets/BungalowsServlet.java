@@ -60,7 +60,7 @@ public class BungalowsServlet extends HttpServlet
 		{
 			Integer requestid = Converter.getIntegerOf(request.getParameter("requestid"));
 			if(requestid == null)
-				throw new Exception("L'identifiant de requête est introuvable, impossible de determiner le type de la requête");
+				throw new Exception("L'identifiant de requete est introuvable, impossible de determiner le type de la requete");
 			
 			switch(requestid)
 			{
@@ -125,6 +125,6 @@ public class BungalowsServlet extends HttpServlet
 			Collection<Bungalow> bungalows = this.bungalowBean.getBungalows(minbedcount, islandid, minprice, maxprice, startweek, endweek);
 			response.getWriter().append(this.convertToJson(bungalows).toString());
 		}
-		else throw new Exception("Un ou plusieurs des arguments attendus n'ont pas étés renseignés");
+		else throw new Exception("Un ou plusieurs des arguments attendus n'ont pas etes renseignes");
 	}
 }
