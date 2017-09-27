@@ -29,10 +29,10 @@ export class BookComponent implements OnInit {
   payment(){
     this.booktService.pay(this.numCarte).subscribe(payRes =>
       {
-        if(payRes.state== 1){
+        if(payRes.state["state"]== "1"){
           console.log("Youpi, y'a plus qu'a lui dire qu'on valide !")
         }
-        else if(payRes.state==0){
+        else if(payRes.state["state"]=="0"){
           console.log("Paiement refusé")
 
         }

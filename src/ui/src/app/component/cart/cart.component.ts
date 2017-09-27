@@ -12,28 +12,39 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 export class CartComponent implements OnInit {
   cartItems : CartItem[];
   totalprice : number;
+  isempty : number = 0;
   public location = '/cart';
   constructor(private cartService : CartService, private router: Router) { }
 
   ngOnInit() {
+      if (this.isempty ==  0){
     this.cartService.getCart().subscribe(cartRes => {
+        this.cartItems = [];
+        this.totalprice = 0;
           if(!cartRes.err){
             this.cartItems = cartRes.cartitems;
             this.totalprice = 0;
             for(let cartItem of this.cartItems){
               this.totalprice += cartItem.bungalow.weekprice * cartItem.duration;
             }
+            console.log(cartRes);
+
       }
       else console.log("Err : " + cartRes.err);
     });
+    }
+    else{
+        console.log("lol");
+    }
   }
   validate(){
     this.cartService.validateCart().subscribe(validRes =>
       {
-        if(validRes.state== 1){
-          this.router.navigate(['/prebook', JSON.stringify(validRes)]);
+        if(validRes.state["state"]== "1"){;
+          this.router.navigate(['/prebook', JSON.stringify(this.cartItems)]);
         }
-        else if(validRes.state==0){
+        else if(validRes.state["state"]== "0"){
+            console.log("tant pis");
 
         }
         else{
@@ -47,22 +58,12 @@ export class CartComponent implements OnInit {
     this.cartService.emptyCart().subscribe(validRes =>
       {
         if(validRes.state["state"]== 1){
-          console.log("la vie est belle");/*
-          this.cartService.getCart().subscribe(cartRes => {
-                if(!cartRes.err){
-                  this.cartItems = cartRes.cartitems;
-                  this.totalprice = 0;
-                  for(let cartItem of this.cartItems){
-                    this.totalprice += cartItem.bungalow.weekprice * cartItem.duration;
-                  }
-            }
-            else console.log("Err : " + cartRes.err);
-          });*/
-          //this.router.reload();
+          console.log("la vie est belle");
+          this.cartService.getCart();
+          this.isempty = 1;
           this.cartItems = [];
           this.totalprice = 0;
-          this.cartService.getCart();
-          window.location.reload();
+          //window.location.reload();
        }
         else if(validRes.state["state"]==0){
           console.log("la vie est pas belle")

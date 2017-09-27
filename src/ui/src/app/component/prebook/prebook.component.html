@@ -35,10 +35,10 @@
         </tr>
       </tbody>
 </table>
- <input (click)="gotToPayment()" type="button" value="Commander et payer" />
- <input (click)="Annuler()" type="button" value="Annuler" />
+ <button  class="btn btn-info btn-lg"  (click)="gotToPayment()" type="button" >Commander et payer ! </button>
+ <button  class="btn btn-info btn-lg"  (click)="Annuler()" type="button"> Annuler </button>
 
 </ng-template>
 <ng-template #empty_state>
-Jamais censé arriver
+C'est bien vide ici..
 </ng-template>
