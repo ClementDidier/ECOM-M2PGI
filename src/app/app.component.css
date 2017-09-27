@@ -1,0 +1,42 @@
+.searchzone{
+  background-color: #5B879F;
+  border-radius: 5px;
+  height: auto;
+  padding-left: 15px;
+
+}
+.menu, .fildarianne{
+  background-color: #8BAFC2;
+    border-radius: 5px;
+    margin-bottom: 7px;
+}
+.menu #recap{
+  display: inline;
+}
+
+.menu a{
+  height: 30px;
+  text-decoration: none;
+  padding: 3px;
+  margin: 3px;
+}
+
+#logo{
+  background-image: url('../assets/img/logo.png');
+}
+
+.nav, .route{
+  display:inline;
+  background-color: #8BAFC2;
+  height: 20px;
+  border-radius: 2px;
+  font-size: 1.25em;
+  width: 5%;
+}
+.nav:hover, .route:hover{
+  background-color:#5B879F;
+  text-decoration: none;
+}
+.nav, .route{
+  color:#FAC78A;
+}

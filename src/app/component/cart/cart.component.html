@@ -1,0 +1,48 @@
+<div *ngIf="cartItems && cartItems.length > 0;then content else empty_state">here is ignored</div>
+
+<ng-template #content>
+  Voici ce que content votre panier :
+  <table class="table table-striped .table-hover">
+        <thead class="thead-inverse">
+        <tr>
+          <td>Bungalow</td>
+          <td>Durée</td>
+          <td>Prix</td>
+        </tr>
+      </thead>
+      <tbody *ngFor="let cartItem of cartItems">
+            <tr>
+              <td>
+                  <app-bungalow [bungalow]="cartItem.bungalow"></app-bungalow>
+              </td>
+              <td>
+                {{cartItem.duration}} semaine(s)
+              </td>
+              <td>
+                {{cartItem.bungalow.weekprice * cartItem.duration}}
+              </td>
+            </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+            Total : {{totalprice}}
+          </td>
+        </tr>
+      </tbody>
+</table>
+ <button type="button" class="btn btn-info btn-lg" (click)="validate()">Commander</button>
+ <button type="button" class="btn btn-info btn-lg" (click)="emptyCart()">Vider le panier</button>
+</ng-template>
+
+<ng-template #empty_state>
+<p>
+Votre panier est vide !
+Remplissez le et revenez ici pour commander vos vacances !
+</p>
+<button type="button" class="btn btn-info btn-lg" routerLink="/">Retour à l'accueil</button>
+</ng-template>

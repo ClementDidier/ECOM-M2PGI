@@ -1,0 +1,16 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<a routerLink="/"><img src="../assets/img/logo.png"/></a>
+
+<div class="menu" >
+  <a routerLink="/list">  <div class="nav">Liste</div></a>
+  <a routerLink="signin"><div class="nav">Se connecter</div></a>
+  <div id="recap" class=" pull-right">
+      <a routerLink="cart">  <div class="route">Panier</div></a>
+      <a href="#">  <div class="route">Compte</div></a>
+  </div>
+</div>
+
+<div class="searchzone">
+  <app-bungalow-search></app-bungalow-search>
+</div>
+<router-outlet></router-outlet>
