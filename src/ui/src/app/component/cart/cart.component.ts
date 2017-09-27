@@ -59,6 +59,8 @@ export class CartComponent implements OnInit {
             else console.log("Err : " + cartRes.err);
           });*/
           //this.router.reload();
+          this.cartItems = [];
+          this.totalprice = 0;
           this.cartService.getCart();
           window.location.reload();
        }
